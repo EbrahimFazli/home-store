@@ -1,2 +1,3 @@
-# home-store
-Online home appliance store — Software Engineering course project
+# HomeStore
+
+پروژهٔ درس مهندسی نرم‌افزار
