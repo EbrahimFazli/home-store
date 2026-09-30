@@ -1,0 +1,450 @@
+\documentclass[12pt, a4paper]{article}
+
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+% ---------- پکیج‌های پایه ----------
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small سند چشم‌انداز — هوم‌استور}
+\fancyhead[L]{\small نسخهٔ ۱.۰}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\usepackage{xcolor}
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+
+\linespread{1.4}
+
+% ---------- اطلاعات سند ----------
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge سند چشم‌انداز}\\[0.3cm]
+    \textbf{\LARGE پروژهٔ هوم‌استور}\\[0.5cm]
+    \large یک فروشگاه آنلاین لوازم خانگی
+}
+\author{
+    تهیه‌کننده: فضلی\\
+    دانشگاه: أزاد واحد زنجان\\
+    ترم: اول ۱۴۰۵
+}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{نام پروژه} & هوم‌استور (HomeStore) \\
+\hline
+\textbf{نسخهٔ سند} & ۱.۰ \\
+\hline
+\textbf{تاریخ} & \today \\
+\hline
+\textbf{تهیه‌کننده} & فضلی \\
+\hline
+\textbf{وضعیت} & پیش‌نویس \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{مقدمه}
+
+\subsection{هدف سند}
+این سند چشم‌انداز، دامنه و ذی‌نفعان پروژهٔ \textbf{هوم‌استور} را تعریف می‌کند.
+هدف آن ایجاد یک درک مشترک میان تیم توسعه، مشتری و ذی‌نفعان درباره
+«چه چیزی می‌سازیم، برای چه کسی، و چرا» است.
+
+این سند \textbf{قرارداد رسمی} نیست، بلکه \textbf{مرجع راهنما} برای تصمیم‌گیری‌های
+بعدی در طول چرخهٔ حیات پروژه است و در هر Sprint بازبینی می‌شود.
+
+\subsection{دامنهٔ سند}
+\begin{itemize}
+    \item \textbf{در دامنه:} اهداف کسب‌وکار، کاربران هدف، محدودهٔ MVP، معیارهای موفقیت، ریسک‌های سطح بالا.
+    \item \textbf{خارج از دامنه:} جزئیات فنی، طراحی UI، نیازمندی‌های دقیق functional.
+\end{itemize}
+
+\subsection{تعاریف و اصطلاحات}
+\begin{center}
+\begin{tabular}{|c|p{9cm}|}
+\hline
+\textbf{اصطلاح} & \textbf{تعریف} \\
+\hline
+MVP & Minimum Viable Product — کمینهٔ محصول قابل ارائه \\
+\hline
+User Story & توصیف نیازمندی از دید کاربر \\
+\hline
+Persona & نمایندهٔ فرضی کاربر هدف \\
+\hline
+Sprint & بازهٔ کوتاه توسعه (۲-۳ هفته) در Scrum \\
+\hline
+DoD & Definition of Done — معیار «تمام‌شده» بودن کار \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{مراجع}
+\begin{itemize}
+    \item IEEE 830 — Recommended Practice for Software Requirements Specifications
+    \item Roman Pichler — \textit{Product Vision Board}
+    \item Scrum Guide (2020)
+    \item Sommerville — \textit{Software Engineering}, Chapters 1-2
+\end{itemize}
+
+% ============================================================
+\section{چشم‌انداز محصول}
+
+\subsection{بیانیهٔ چشم‌انداز}
+
+\begin{quote}
+\textbf{برای} صاحبان فروشگاه‌های کوچک لوازم خانگی \textbf{که} محصولات اصل و
+با گارانتی می‌فروشند اما فقط مشتریان محلی آن‌ها را می‌شناسند،
+\textbf{هوم‌استور} یک \textbf{فروشگاه آنلاین} است
+\textbf{که} کاتالوگ، مقایسه و ثبت سفارش را به‌صورت ساده و قابل‌اعتماد فراهم می‌کند.
+
+\textbf{برخلاف} مارکت‌پلیس‌های بزرگ که فروشنده‌های متعدد و کیفیت نامطمئن دارند،
+\textbf{محصول ما} روی یک فروشندهٔ قابل‌اعتماد با گارانتی واقعی تمرکز دارد.
+\end{quote}
+
+\subsection{ارزش پیشنهادی}
+\begin{center}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{برای} & \textbf{ارزش} \\
+\hline
+مشتری نهایی & خرید سریع، مقایسهٔ آسان، اطمینان از گارانتی \\
+\hline
+صاحب فروشگاه (ادمین) & دسترسی به مشتریان فراتر از محله، مدیریت سادهٔ محصولات \\
+\hline
+انباردار & ثبت و پیگیری دقیق موجودی بدون کاغذبازی \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{مزیت رقابتی}
+\begin{itemize}
+    \item \textbf{سادگی:} رابط کاربری ساده‌تر از دیجی‌کالا و بامیلو
+    \item \textbf{تمرکز:} فقط لوازم خانگی، نه هر چیز
+    \item \textbf{اعتماد:} گارانتی و اصالت محصول تضمین‌شده
+    \item \textbf{محلی‌بودن:} پشتیبانی از مشتریان شهرهای کوچک
+\end{itemize}
+
+% ============================================================
+\section{مشکل و فرصت}
+
+\subsection{مشکل فعلی}
+صاحبان فروشگاه‌های کوچک لوازم خانگی با چالش‌های زیر روبه‌رو هستند:
+\begin{enumerate}
+    \item \textbf{محدودیت جغرافیایی:} فقط مشتریان محلی از آن‌ها خرید می‌کنند.
+    \item \textbf{نبود کانال آنلاین:} نمی‌توانند محصولات خود را آنلاین عرضه کنند.
+    \item \textbf{فرآیند دستی سفارش:} سفارش‌ها تلفنی، یادداشت‌شده و پرخطا.
+    \item \textbf{عدم شفافیت موجودی:} مشتری نمی‌داند چه چیزی موجود است.
+    \item \textbf{نبود امکان مقایسه:} مشتری نمی‌تواند محصولات را کنار هم ببیند.
+\end{enumerate}
+
+\subsection{فرصت}
+\begin{itemize}
+    \item رشد خرید آنلاین لوازم خانگی در ایران
+    \item افزایش نفوذ اینترنت در شهرهای کوچک
+    \item عدم حضور فروشگاه‌های کوچک در فضای آنلاین
+    \item امکان ایجاد یک بازار نیچ برای محصولات اصل با گارانتی
+\end{itemize}
+
+% ============================================================
+\section{کاربران هدف و ذی‌نفعان}
+
+\subsection{ذی‌نفعان}
+\begin{center}
+\begin{tabular}{|l|l|p{5cm}|}
+\hline
+\textbf{ذی‌نفع} & \textbf{نقش} & \textbf{علاقه} \\
+\hline
+خانم رضایی & صاحب فروشگاه (ادمین) & فروش بیشتر، مدیریت آسان \\
+\hline
+مشتری نهایی & خریدار لوازم خانگی & خرید سریع، اطمینان، مقایسه \\
+\hline
+انباردار & مسئول موجودی & ثبت دقیق، دسترسی سریع \\
+\hline
+تیم توسعه & سازندهٔ محصول & تحویل به‌موقع، یادگیری \\
+\hline
+استاد درس & ناظر پروژه & رعایت اصول مهندسی \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{پرسوناهای کلیدی}
+جزئیات کامل در \texttt{personas.md}. خلاصه:
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{پرسونا} & \textbf{نقش} & \textbf{ویژگی کلیدی} \\
+\hline
+خانم رضایی & ادمین & ۴۲ ساله، مهارت فنی متوسط \\
+\hline
+مریم & مشتری & ۳۲ ساله، خریدار آگاه \\
+\hline
+رضا & انباردار & ۲۸ ساله، مهارت فنی پایین \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{محدودهٔ محصول}
+
+\subsection{داخل محدوده (MVP)}
+
+\textbf{کاربری (Functional):}
+\begin{itemize}
+    \item \textbf{F-01} نمایش کاتالوگ محصولات با تصویر، قیمت و مشخصات
+    \item \textbf{F-02} جست‌وجو و فیلتر پیشرفته (برند، قیمت، مصرف انرژی، ظرفیت)
+    \item \textbf{F-03} صفحهٔ جزئیات محصول با گارانتی و مشخصات فنی
+    \item \textbf{F-04} مقایسهٔ ۲-۳ محصول در جدول
+    \item \textbf{F-05} سبد خرید (افزودن، حذف، تغییر تعداد)
+    \item \textbf{F-06} ثبت سفارش با فرم و اعتبارسنجی
+    \item \textbf{F-07} پنل ادمین: افزودن/ویرایش/حذف محصول
+    \item \textbf{F-08} پنل ادمین: مشاهدهٔ سفارش‌ها و تغییر وضعیت
+\end{itemize}
+
+\textbf{غیرکاربری (Non-functional):}
+\begin{itemize}
+    \item \textbf{NF-01} زمان بارگذاری صفحه < ۲ ثانیه
+    \item \textbf{NF-02} پشتیبانی از ۱۰۰ کاربر همزمان
+    \item \textbf{NF-03} رابط کاربری واکنش‌گرا برای موبایل و دسکتاپ
+    \item \textbf{NF-04} رمزنگاری گذرواژه‌ها (bcrypt)
+    \item \textbf{NF-05} پشتیبانی از زبان فارسی و RTL
+\end{itemize}
+
+\subsection{خارج از محدوده}
+\begin{center}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{مورد} & \textbf{دلیل} \\
+\hline
+پرداخت واقعی (درگاه بانکی) & نیاز به مجوز و زیرساخت — فقط شبیه‌سازی \\
+\hline
+اپلیکیشن موبایل & تمرکز روی وب \\
+\hline
+سیستم حمل و نقل & خارج از توان یک ترم \\
+\hline
+گارانتی واقعی و خدمات پس از فروش & پیچیدگی حقوقی \\
+\hline
+چت پشتیبانی آنلاین & اولویت پایین \\
+\hline
+چند زبانه & تمرکز روی فارسی \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{محدودیت‌ها}
+\begin{itemize}
+    \item \textbf{زمانی:} ۱۴ هفته، ۳ Sprint
+    \item \textbf{تیمی:} ۳-۴ نفر
+    \item \textbf{فنی:} بدون سرور اختصاصی، استقرار روی سرویس ابری رایگان
+    \item \textbf{بودجه:} صفر (فقط ابزارهای رایگان)
+\end{itemize}
+
+% ============================================================
+\section{معیارهای موفقیت}
+
+\subsection{معیارهای کاربری}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{معیار} & \textbf{هدف} & \textbf{نحوهٔ اندازه‌گیری} \\
+\hline
+زمان ثبت سفارش & < ۳ دقیقه & تست کاربری \\
+\hline
+زمان افزودن محصول & < ۲ دقیقه & تست کاربری \\
+\hline
+رضایت کاربر & > ۸۰٪ & نظرسنجی ساده \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{معیارهای فنی}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{معیار} & \textbf{هدف} \\
+\hline
+پوشش تست (Code Coverage) & > ۷۰٪ \\
+\hline
+تعداد باگ بحرانی در انتشار & صفر \\
+\hline
+زمان Build در CI & < ۵ دقیقه \\
+\hline
+موفقیت Deploy & ۱۰۰٪ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{معیارهای فرآیندی}
+\begin{itemize}
+    \item تحویل هر Sprint به‌موقع
+    \item رعایت Definition of Done در هر Story
+    \item مستندات به‌روز در پایان هر Sprint
+\end{itemize}
+
+% ============================================================
+\section{ریسک‌های سطح بالا}
+
+\begin{center}
+\begin{tabular}{|p{4cm}|c|c|p{4cm}|}
+\hline
+\textbf{ریسک} & \textbf{احتمال} & \textbf{اثر} & \textbf{راهکار کاهش} \\
+\hline
+تغییر نیازمندی‌ها & بالا & متوسط & Sprintهای کوتاه، Backlog منعطف \\
+\hline
+کمبود زمان & متوسط & بالا & MVP کوچک، اولویت MoSCoW \\
+\hline
+ضعف فنی تیم & متوسط & متوسط & منتورینگ استاد، تقسیم کار \\
+\hline
+از دست دادن داده & کم & بالا & Backup خودکار، Git \\
+\hline
+Scope Creep & بالا & بالا & مرزبندی دقیق MVP، تأیید استاد \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{رویکرد و متدولوژی}
+
+\subsection{متدولوژی}
+\begin{itemize}
+    \item \textbf{Scrum سبک‌شده:} ۳ Sprint دو-سه هفته‌ای
+    \item \textbf{ابزار مدیریت:} GitHub Projects
+    \item \textbf{جلسات:} Sprint Planning، Daily کوتاه، Review، Retrospective
+\end{itemize}
+
+\subsection{فناوری پیشنهادی}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{لایه} & \textbf{فناوری} \\
+\hline
+Backend & Node.js + Express \\
+\hline
+Frontend & React \\
+\hline
+Database & PostgreSQL \\
+\hline
+Version Control & Git + GitHub \\
+\hline
+CI/CD & GitHub Actions \\
+\hline
+مستندسازی & Markdown در GitHub \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Definition of Done}
+یک Story وقتی «تمام» است که:
+\begin{enumerate}
+    \item کد نوشته و Merge شده باشد.
+    \item تست Unit برای آن نوشته شده باشد.
+    \item Code Review شده باشد.
+    \item مستندات مربوطه به‌روز شده باشد.
+    \item در محیط Demo کار کند.
+\end{enumerate}
+
+% ============================================================
+\section{نقشهٔ راه}
+
+\begin{center}
+\begin{tabular}{|c|c|p{4cm}|p{4.5cm}|}
+\hline
+\textbf{Sprint} & \textbf{بازه} & \textbf{تمرکز} & \textbf{خروجی} \\
+\hline
+Sprint 1 & هفته ۱-۵ & کاتالوگ و کشف & لیست محصولات، جست‌وجو، فیلتر، سبد خرید \\
+\hline
+Sprint 2 & هفته ۶-۱۱ & تراکنش و مدیریت & ثبت سفارش، مقایسه، پنل ادمین \\
+\hline
+Sprint 3 & هفته ۱۲-۱۴ & کیفیت و انتشار & تست کامل، CI/CD، مستندات، Demo Day \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{تأیید و تصویب}
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{نقش} & \textbf{نام} & \textbf{تاریخ} & \textbf{امضا} \\
+\hline
+صاحب محصول & [نام استاد] & \today & \\
+\hline
+مشتری فرضی & خانم رضایی & \today & \\
+\hline
+نمایندهٔ تیم & [نام] & \today & \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\appendix
+\section{تاریخچهٔ تغییرات}
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{نسخه} & \textbf{تاریخ} & \textbf{تغییرات} & \textbf{تهیه‌کننده} \\
+\hline
+۱.۰ & \today & نسخهٔ اولیه & [نام] \\
+\hline
+ & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
