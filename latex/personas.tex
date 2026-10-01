@@ -1,0 +1,361 @@
+\documentclass[12pt, a4paper]{article}
+
+% ---------- پکیج‌های پایه (قبل از xepersian) ----------
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+
+% ---------- xepersian (باید آخرین پکیج باشد) ----------
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\geometry{margin=2.5cm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\setlist{nosep, leftmargin=*}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small سند پرسوناها — هوم‌استور}
+\fancyhead[L]{\small نسخهٔ ۱.۰}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\linespread{1.4}
+
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge سند پرسوناها}\\[0.3cm]
+    \textbf{\LARGE پروژهٔ هوم‌استور}\\[0.5cm]
+    \large کاربران هدف و ویژگی‌های آن‌ها
+}
+\author{
+    تهیه‌کننده: ابراهیم فضلی\\
+    دانشگاه: أزاد واحد زنجان\\
+    ترم: ۱۴۰۴
+}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{نام پروژه} & هوم‌استور (HomeStore) \\
+\hline
+\textbf{نسخهٔ سند} & ۱.۰ \\
+\hline
+\textbf{تاریخ} & \today \\
+\hline
+\textbf{تهیه‌کننده} & ابراهیم فضلی \\
+\hline
+\textbf{وضعیت} & پیش‌نویس \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{مقدمه}
+
+\subsection{هدف سند}
+این سند پرسوناهای کاربران هدف پروژهٔ \textbf{هوم‌استور} را تعریف می‌کند.
+هدف آن ایجاد درک عمیق از نیازها، اهداف و دردهای کاربران است تا
+تصمیم‌گیری‌های طراحی و توسعه بر پایهٔ آن‌ها انجام شود.
+
+\subsection{چرا پرسونا؟}
+پرسونا یک \textbf{نمایندهٔ فرضی} از یک گروه کاربری است که با داده‌های واقعی
+ساخته می‌شود. پرسونا کمک می‌کند:
+\begin{itemize}
+    \item تیم توسعه بداند برای \textbf{چه کسی} می‌سازد.
+    \item از «طراحی برای همه» پرهیز شود.
+    \item اولویت‌بندی ویژگی‌ها بر پایهٔ نیاز واقعی کاربران باشد.
+\end{itemize}
+
+\subsection{روش‌شناسی}
+پرسوناها بر پایهٔ موارد زیر ساخته شده‌اند:
+\begin{itemize}
+    \item مصاحبهٔ فرضی با مشتری
+    \item مشاهدهٔ رفتار خرید آنلاین لوازم خانگی
+    \item مطالعهٔ سایت‌های مشابه
+    \item تجربهٔ شخصی
+\end{itemize}
+
+% ============================================================
+\section{پرسونا ۱ — خانم رضایی (ادمین)}
+
+\subsection{مشخصات دموگرافیک}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ویژگی} & \textbf{مقدار} \\
+\hline
+نام & فاطمه رضایی \\
+\hline
+سن & ۴۲ سال \\
+\hline
+جنسیت & زن \\
+\hline
+شغل & صاحب فروشگاه لوازم خانگی \\
+\hline
+محل زندگی & کاشان \\
+\hline
+تحصیلات & دیپلم \\
+\hline
+مهارت فنی & متوسط \\
+\hline
+وضعیت تأهل & متأهل، دو فرزند \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{نقل‌قول}
+\begin{quote}
+«محصولاتم اصل و با گارانتی‌اند، اما فقط مشتری‌های محلی من را می‌شناسند.»
+\end{quote}
+
+\subsection{اهداف}
+\begin{itemize}
+    \item افزایش فروش فراتر از مشتریان محلی
+    \item مدیریت آسان محصولات و سفارش‌ها
+    \item دسترسی به مشتریان شهرهای اطراف
+    \item کاهش وابستگی به فروش حضوری
+\end{itemize}
+
+\subsection{دردها}
+\begin{itemize}
+    \item نمی‌تواند محصولات را آنلاین نمایش دهد
+    \item سفارش‌ها تلفنی و پراکنده‌اند
+    \item موجودی را دستی ثبت می‌کند
+    \item رقابت با فروشگاه‌های بزرگ سخت است
+\end{itemize}
+
+\subsection{نیازها}
+\begin{itemize}
+    \item پنل ادمین ساده و فارسی
+    \item افزودن محصول در کمتر از ۲ دقیقه
+    \item مشاهدهٔ سفارش‌ها در یک صفحه
+    \item تغییر وضعیت سفارش
+\end{itemize}
+
+\subsection{سناریوی استفاده}
+\begin{quote}
+صبح مغازه را باز می‌کند. با لپ‌تاپ وارد پنل ادمین می‌شود.
+سه محصول جدید اضافه می‌کند. سفارش‌های دیشب را می‌بیند
+و وضعیت دو سفارش را به «تحویل‌شده» تغییر می‌دهد.
+\end{quote}
+
+% ============================================================
+\section{پرسونا ۲ — مریم (مشتری نهایی)}
+
+\subsection{مشخصات دموگرافیک}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ویژگی} & \textbf{مقدار} \\
+\hline
+نام & مریم احمدی \\
+\hline
+سن & ۳۲ سال \\
+\hline
+جنسیت & زن \\
+\hline
+شغل & کارمند بانک \\
+\hline
+محل زندگی & تهران \\
+\hline
+تحصیلات & کارشناسی \\
+\hline
+مهارت فنی & بالا \\
+\hline
+وضعیت تأهل & متأهل، یک فرزند \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{نقل‌قول}
+\begin{quote}
+«وقت ندارم به مغازه بروم. می‌خواهم سریع یخچال مناسب را پیدا کنم.»
+\end{quote}
+
+\subsection{اهداف}
+\begin{itemize}
+    \item خرید سریع و آسان لوازم خانگی
+    \item مقایسهٔ محصولات
+    \item اطمینان از اصالت و گارانتی
+    \item تحویل در محل
+\end{itemize}
+
+\subsection{دردها}
+\begin{itemize}
+    \item وقت کافی ندارد
+    \item سایت‌ها شلوغ و پرتبلیغ‌اند
+    \item نمی‌داند کدام فروشنده قابل‌اعتماد است
+    \item مقایسه سخت است
+\end{itemize}
+
+\subsection{نیازها}
+\begin{itemize}
+    \item جست‌وجو و فیلتر پیشرفته
+    \item مقایسهٔ ۲-۳ محصول
+    \item صفحهٔ محصول با گارانتی
+    \item سبد خرید ساده
+    \item ثبت سفارش سریع
+\end{itemize}
+
+\subsection{سناریوی استفاده}
+\begin{quote}
+در استراحت ناهار با موبایل وارد سایت می‌شود.
+جست‌وجو می‌کند «یخچال ساید». با فیلتر قیمت
+و برند، سه گزینه می‌بیند. دو تا را مقایسه می‌کند.
+یکی را سفارش می‌دهد.
+\end{quote}
+
+% ============================================================
+\section{پرسونا ۳ — رضا (انباردار)}
+
+\subsection{مشخصات دموگرافیک}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ویژگی} & \textbf{مقدار} \\
+\hline
+نام & رضا کریمی \\
+\hline
+سن & ۲۸ سال \\
+\hline
+جنسیت & مرد \\
+\hline
+شغل & انباردار \\
+\hline
+محل زندگی & کاشان \\
+\hline
+تحصیلات & دیپلم \\
+\hline
+مهارت فنی & پایین \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{نقل‌قول}
+\begin{quote}
+«با کاغذ و قلم کار کردن خطا زیاد دارد.»
+\end{quote}
+
+\subsection{اهداف}
+\begin{itemize}
+    \item ثبت دقیق موجودی
+    \item اطلاع سریع از کمبود
+    \item هماهنگی با فروش آنلاین
+    \item کاهش خطای انسانی
+\end{itemize}
+
+\subsection{دردها}
+\begin{itemize}
+    \item سیستم کاغذی پرخطاست
+    \item نمی‌داند چه در انبار است
+    \item هماهنگی سخت است
+    \item با نرم‌افزار راحت نیست
+\end{itemize}
+
+\subsection{نیازها}
+\begin{itemize}
+    \item رابط کاربری بسیار ساده
+    \item ثبت موجودی با چند کلیک
+    \item هشدار کمبود
+    \item گزارش روزانه
+\end{itemize}
+
+\subsection{سناریوی استفاده}
+\begin{quote}
+صبح با تبلت وارد پنل انبار می‌شود.
+۱۰ ماشین لباسشویی جدید را ثبت می‌کند.
+لیست کمبودها را می‌بیند و به خانم رضایی خبر می‌دهد.
+\end{quote}
+
+% ============================================================
+\section{ماتریس اولویت‌بندی}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{پرسونا} & \textbf{تأثیر} & \textbf{اولویت} \\
+\hline
+مریم (مشتری) & بالا & اول \\
+\hline
+خانم رضایی (ادمین) & بالا & اول \\
+\hline
+رضا (انباردار) & متوسط & دوم \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{نتیجه‌گیری}
+\begin{itemize}
+    \item \textbf{UI/UX} باید برای \textbf{مریم} (مشتری) بهینه باشد.
+    \item \textbf{پنل ادمین} باید برای \textbf{خانم رضایی} ساده باشد.
+    \item \textbf{پنل انبار} می‌تواند در Sprint 3 اضافه شود.
+\end{itemize}
+
+% ============================================================
+\section{اتصال به User Stories}
+
+پرسوناها پایهٔ User Storyها هستند:
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{پرسونا} & \textbf{نمونه User Story} \\
+\hline
+مریم & می‌خواهم محصولات را بر اساس قیمت فیلتر کنم \\
+\hline
+خانم رضایی & می‌خواهم محصول جدید اضافه کنم \\
+\hline
+رضا & می‌خواهم موجودی را به‌روز کنم \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\appendix
+\section{تاریخچهٔ تغییرات}
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{نسخه} & \textbf{تاریخ} & \textbf{تغییرات} & \textbf{تهیه‌کننده} \\
+\hline
+۱.۰ & \today & نسخهٔ اولیه & ابراهیم فضلی \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
