@@ -1,0 +1,443 @@
+\documentclass[12pt, a4paper]{article}
+
+% ---------- Base Packages ----------
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Helvetica}
+\setmonofont{Courier New}
+
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small Vision Document --- HomeStore}
+\fancyhead[L]{\small Version 1.0}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\usepackage{xcolor}
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+
+\linespread{1.4}
+
+% ---------- Document Info ----------
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge Vision Document}\\[0.3cm]
+    \textbf{\LARGE HomeStore Project}\\[0.5cm]
+    \large An Online Home Appliance Store
+}
+\author{
+    Author: Ebrahim Fazli\\
+    University: Azad University Zanjan Branch\\
+    Term: Fall 2026
+}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Project Name} & HomeStore \\
+\hline
+\textbf{Document Version} & 1.0 \\
+\hline
+\textbf{Date} & \today \\
+\hline
+\textbf{Author} & Ebrahim fazli \\
+\hline
+\textbf{Status} & Draft \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Introduction}
+
+\subsection{Purpose}
+This Vision document defines the vision, scope, and stakeholders of the
+\textbf{HomeStore} project. Its purpose is to establish a shared understanding
+among the development team, the customer, and stakeholders regarding
+\emph{what we are building, for whom, and why}.
+
+This document is \textbf{not a formal contract}, but a \textbf{guiding reference}
+for future decisions throughout the software lifecycle. It is reviewed
+at the end of each Sprint.
+
+\subsection{Scope}
+\begin{itemize}
+    \item \textbf{In scope:} Business goals, target users, MVP boundaries, success metrics, high-level risks.
+    \item \textbf{Out of scope:} Technical details, UI design, detailed functional requirements (covered in the SRS).
+\end{itemize}
+
+\subsection{Definitions and Acronyms}
+\begin{center}
+\begin{tabular}{|c|p{9cm}|}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+MVP & Minimum Viable Product \\
+\hline
+User Story & A requirement described from the user's perspective \\
+\hline
+Persona & A fictional representative of a target user \\
+\hline
+Sprint & A short development cycle (2--3 weeks) in Scrum \\
+\hline
+DoD & Definition of Done --- the criterion for ``completed'' work \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{References}
+\begin{itemize}
+    \item IEEE 830 --- Recommended Practice for Software Requirements Specifications
+    \item Roman Pichler --- \textit{Product Vision Board}
+    \item Scrum Guide (2020)
+    \item Sommerville --- \textit{Software Engineering}, Chapters 1--2
+\end{itemize}
+
+% ============================================================
+\section{Product Vision}
+
+\subsection{Vision Statement}
+
+\begin{quote}
+\textbf{For} owners of small home-appliance stores \textbf{who} sell authentic,
+warranty-backed products but are only known to local customers,
+\textbf{HomeStore} is an \textbf{online storefront}
+\textbf{that} provides a simple, trustworthy catalog, comparison, and
+ordering experience.
+
+\textbf{Unlike} large marketplaces with multiple sellers and uncertain
+quality, \textbf{our product} focuses on a single trusted seller with
+genuine warranties.
+\end{quote}
+
+\subsection{Value Proposition}
+\begin{center}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{For} & \textbf{Value} \\
+\hline
+End customer & Fast purchase, easy comparison, warranty assurance \\
+\hline
+Store owner (Admin) & Access to customers beyond the neighborhood, simple product management \\
+\hline
+Warehouse staff & Accurate inventory tracking without paperwork \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Competitive Advantage}
+\begin{itemize}
+    \item \textbf{Simplicity:} A simpler UI than Digikala and Bamilo
+    \item \textbf{Focus:} Only home appliances, nothing else
+    \item \textbf{Trust:} Guaranteed authenticity and warranty
+    \item \textbf{Local-first:} Support for customers in smaller cities
+\end{itemize}
+
+% ============================================================
+\section{Problem and Opportunity}
+
+\subsection{Problem Statement}
+Owners of small home-appliance stores face the following challenges:
+\begin{enumerate}
+    \item \textbf{Geographic limitation:} Only local customers buy from them.
+    \item \textbf{No online channel:} They cannot offer products online.
+    \item \textbf{Manual order process:} Orders are taken by phone, noted on paper, and error-prone.
+    \item \textbf{Inventory opacity:} Customers do not know what is in stock.
+    \item \textbf{No comparison ability:} Customers cannot compare products side by side.
+\end{enumerate}
+
+\subsection{Opportunity}
+\begin{itemize}
+    \item Growth of online home-appliance shopping in Iran
+    \item Increasing internet penetration in small cities
+    \item Absence of small stores in the online space
+    \item Opportunity to create a niche market for authentic, warranty-backed products
+\end{itemize}
+
+% ============================================================
+\section{Target Users and Stakeholders}
+
+\subsection{Stakeholders}
+\begin{center}
+\begin{tabular}{|l|l|p{5cm}|}
+\hline
+\textbf{Stakeholder} & \textbf{Role} & \textbf{Interest} \\
+\hline
+Mrs. Rezaei & Store owner (Admin) & More sales, easy management \\
+\hline
+End customer & Home-appliance buyer & Fast purchase, trust, comparison \\
+\hline
+Warehouse staff & Inventory manager & Accurate records, quick access \\
+\hline
+Development team & Product builders & On-time delivery, learning \\
+\hline
+Course instructor & Project supervisor & Engineering discipline \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Key Personas}
+Full details are in \texttt{personas.md}. Summary:
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Persona} & \textbf{Role} & \textbf{Key Trait} \\
+\hline
+Mrs. Rezaei & Admin & 42 years old, moderate technical skill \\
+\hline
+Maryam & Customer & 32 years old, informed buyer \\
+\hline
+Reza & Warehouse staff & 28 years old, low technical skill \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Product Scope}
+
+\subsection{In Scope (MVP)}
+
+\textbf{Functional:}
+\begin{itemize}
+    \item \textbf{F-01} Product catalog with images, prices, and specifications
+    \item \textbf{F-02} Advanced search and filter (brand, price, energy rating, capacity)
+    \item \textbf{F-03} Product detail page with warranty and technical specs
+    \item \textbf{F-04} Compare 2--3 products in a table
+    \item \textbf{F-05} Shopping cart (add, remove, change quantity)
+    \item \textbf{F-06} Order submission with form validation
+    \item \textbf{F-07} Admin panel: add/edit/delete products
+    \item \textbf{F-08} Admin panel: view orders and update status
+\end{itemize}
+
+\textbf{Non-functional:}
+\begin{itemize}
+    \item \textbf{NF-01} Page load time < 2 seconds
+    \item \textbf{NF-02} Support for 100 concurrent users
+    \item \textbf{NF-03} Responsive UI for mobile and desktop
+    \item \textbf{NF-04} Password hashing (bcrypt)
+    \item \textbf{NF-05} Persian (Farsi) language support with RTL layout
+\end{itemize}
+
+\subsection{Out of Scope}
+\begin{center}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Item} & \textbf{Reason} \\
+\hline
+Real payment gateway & Requires license and infrastructure --- simulation only \\
+\hline
+Mobile application & Web-only focus \\
+\hline
+Shipping and logistics & Beyond one semester \\
+\hline
+Real warranty and after-sales & Legal complexity \\
+\hline
+Online chat support & Low priority \\
+\hline
+Multilingual (Persian/English) & Persian-only focus \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Constraints}
+\begin{itemize}
+    \item \textbf{Time:} 14 weeks, 3 Sprints
+    \item \textbf{Team:} 3--4 members
+    \item \textbf{Technical:} No dedicated server; deploy on a free cloud service
+    \item \textbf{Budget:} Zero (free tools only)
+\end{itemize}
+
+% ============================================================
+\section{Success Metrics}
+
+\subsection{User Metrics}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Metric} & \textbf{Target} & \textbf{Measurement} \\
+\hline
+Order submission time & < 3 min & Usability test \\
+\hline
+Admin product-add time & < 2 min & Usability test \\
+\hline
+User satisfaction & > 80\% & Simple survey \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Technical Metrics}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric} & \textbf{Target} \\
+\hline
+Code Coverage & > 70\% \\
+\hline
+Critical bugs per release & Zero \\
+\hline
+CI build time & < 5 min \\
+\hline
+Deployment success & 100\% \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Process Metrics}
+\begin{itemize}
+    \item On-time Sprint delivery
+    \item Compliance with Definition of Done per Story
+    \item Documentation kept up to date at the end of each Sprint
+\end{itemize}
+
+% ============================================================
+\section{High-Level Risks}
+
+\begin{center}
+\begin{tabular}{|p{4cm}|c|c|p{4cm}|}
+\hline
+\textbf{Risk} & \textbf{Probability} & \textbf{Impact} & \textbf{Mitigation} \\
+\hline
+Requirement changes mid-project & High & Medium & Short Sprints, flexible Backlog \\
+\hline
+Time shortage & Medium & High & Small MVP, MoSCoW prioritization \\
+\hline
+Team skill gaps & Medium & Medium & Instructor mentoring, task splitting \\
+\hline
+Data loss & Low & High & Automated backup, Git \\
+\hline
+Scope Creep & High & High & Strict MVP boundaries, instructor approval \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Approach and Methodology}
+
+\subsection{Methodology}
+\begin{itemize}
+    \item \textbf{Lightweight Scrum:} 3 Sprints of 2--3 weeks
+    \item \textbf{Management tool:} GitHub Projects
+    \item \textbf{Ceremonies:} Sprint Planning, short Daily (online), Review, Retrospective
+\end{itemize}
+
+\subsection{Proposed Technology}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Layer} & \textbf{Technology} \\
+\hline
+Backend & Node.js + Express \\
+\hline
+Frontend & React \\
+\hline
+Database & PostgreSQL \\
+\hline
+Version Control & Git + GitHub \\
+\hline
+CI/CD & GitHub Actions \\
+\hline
+Documentation & Markdown in GitHub \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Definition of Done}
+A Story is ``Done'' when:
+\begin{enumerate}
+    \item The code is written and merged.
+    \item Unit tests are written.
+    \item Code review is completed.
+    \item Related documentation is updated.
+    \item It works in the demo environment.
+\end{enumerate}
+
+% ============================================================
+\section{Roadmap}
+
+\begin{center}
+\begin{tabular}{|c|c|p{4cm}|p{4.5cm}|}
+\hline
+\textbf{Sprint} & \textbf{Weeks} & \textbf{Focus} & \textbf{Output} \\
+\hline
+Sprint 1 & 1--5 & Catalog and discovery & Product list, search, filter, cart \\
+\hline
+Sprint 2 & 6--11 & Transaction and management & Order submission, comparison, admin panel \\
+\hline
+Sprint 3 & 12--14 & Quality and release & Full testing, CI/CD, documentation, Demo Day \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Approval}
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Role} & \textbf{Name} & \textbf{Date} & \textbf{Signature} \\
+\hline
+Product Owner & [Instructor Name] & \today & \\
+\hline
+Simulated Customer & Mrs. Rezaei & \today & \\
+\hline
+Team Representative & [Name] & \today & \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\appendix
+\section{Change History}
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{Version} & \textbf{Date} & \textbf{Changes} & \textbf{Author} \\
+\hline
+1.0 & \today & Initial version & [Name] \\
+\hline
+ & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
