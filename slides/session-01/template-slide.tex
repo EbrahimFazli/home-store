@@ -1,0 +1,497 @@
+\documentclass[14pt, a4paper, landscape]{extarticle}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\geometry{margin=1cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+\definecolor{bg}{RGB}{245, 240, 232}
+\definecolor{darkbg}{RGB}{92, 58, 26}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\textcolor{primary}{مهندسی نرم‌افزار — جلسهٔ ۱}}
+\fancyfoot[C]{\textcolor{primary}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\slide}[1]{%
+    \newpage
+    \begin{tcolorbox}[
+        colback=bg,
+        colframe=primary,
+        boxrule=1.5pt,
+        arc=4mm,
+        left=8mm, right=8mm, top=6mm, bottom=6mm,
+        width=\textwidth,
+        height=0.85\textheight
+    ]
+    #1
+    \end{tcolorbox}
+}
+
+\newcommand{\slidetitle}[1]{%
+    \begin{center}
+        {\LARGE\bfseries\textcolor{primary}{#1}}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\myaccent}[1]{\textcolor{accent}{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[darkbg] (current page.north west) rectangle (current page.south east);
+\end{tikzpicture}
+
+\begin{center}
+    \vspace*{4cm}
+    {\color{white}\Huge\bfseries مهندسی نرم‌افزار}
+    
+    \vspace{1cm}
+    
+    {\color{accent}\LARGE جلسهٔ ۱ — معرفی درس}
+    
+    \vspace{2cm}
+    
+    {\color{white}\Large ابراهیم فضلی}
+    
+    \vspace{0.5cm}
+    
+    {\color{white}\large ترم ۱۴۰۴}
+\end{center}
+
+\pagestyle{fancy}
+
+\slide{
+    \slidetitle{یک تصویر، یک سؤال}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries نرم‌افزار هم می‌تواند شکست بخورد.}
+        \vspace{1.5cm}
+        {\Huge\bfseries\myaccent{چرا؟}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{آمار تکان‌دهنده}
+    \vspace{1cm}
+    \begin{center}
+        {\fontsize{80}{90}\selectfont\bfseries\myaccent{۷۰٪}}
+        \vspace{1cm}
+        {\Large پروژه‌های نرم‌افزاری شکست می‌خورند،}
+        {\Large دیر تحویل می‌شوند یا از بودجه فراتر می‌روند.}
+        \vspace{1.5cm}
+        {\small منبع: Standish Group Chaos Report}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{کدنویس vs مهندس نرم‌افزار}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{p{6cm}p{6cm}}
+            \toprule
+            \textbf{\large کدنویس} & \textbf{\large مهندس نرم‌افزار} \\
+            \midrule
+            \rule{0pt}{1em}کد می‌نویسد & مسئله را حل می‌کند \\
+            \hline
+            \rule{0pt}{1em}تنها کار می‌کند & در تیم کار می‌کند \\
+            \hline
+            \rule{0pt}{1em}به امروز فکر می‌کند & به ۵ سال بعد فکر می‌کند \\
+            \hline
+            \rule{0pt}{1em}تست را ضروری نمی‌داند & تست را بخشی از کار می‌داند \\
+            \hline
+            \rule{0pt}{1em}مشتری را نمی‌شناسد & مشتری را می‌فهمد \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries مهندسی نرم‌افزار}
+        \vspace{1.5cm}
+        {\LARGE\myaccent{= ساختن چیزی که کار می‌کند،}}
+        \vspace{0.5cm}
+        {\LARGE\myaccent{در زمان مشخص، با تیم، و قابل نگهداری.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{اهداف درس}
+    \vspace{0.5cm}
+    {\large در پایان این درس می‌توانید:}
+    \vspace{0.5cm}
+    \begin{enumerate}[itemsep=0.5em]
+        \item نیازمندی‌ها را از مشتری استخراج کنید.
+        \item معماری و طراحی یک سیستم را انجام دهید.
+        \item در یک تیم چابک کار کنید.
+        \item کد را تست، بازبینی و CI/CD تحویل دهید.
+        \item کیفیت، ریسک و بدهی فنی را ارزیابی کنید.
+    \end{enumerate}
+}
+
+\slide{
+    \slidetitle{نقشهٔ ۱۴ هفته}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{cl}
+            \toprule
+            \textbf{هفته} & \textbf{موضوع} \\
+            \midrule
+            \rule{0pt}{1em}۱-۲ & نیازمندی‌ها \\
+            \hline
+            \rule{0pt}{1em}۳-۴ & مدل‌سازی و معماری \\
+            \hline
+            \rule{0pt}{1em}۵ & Sprint 1 Review \\
+            \hline
+            \rule{0pt}{1em}۶-۷ & طراحی شیءگرا و الگوها \\
+            \hline
+            \rule{0pt}{1em}۸ & میان‌ترم \\
+            \hline
+            \rule{0pt}{1em}۹-۱۰ & تست و CI/CD \\
+            \hline
+            \rule{0pt}{1em}۱۱ & Sprint 2 Review \\
+            \hline
+            \rule{0pt}{1em}۱۲-۱۳ & کیفیت، ریسک، DevOps \\
+            \hline
+            \rule{0pt}{1em}۱۴ & Demo Day \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{پروژهٔ من: هوم‌استور}
+    \vspace{0.5cm}
+    \begin{center}
+        {\Large\bfseries یک فروشگاه آنلاین لوازم خانگی}
+    \end{center}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item من در طول ترم این پروژه را زنده می‌سازم.
+        \item هدف: نشان دادن نمونهٔ عملی از هر مفهوم درس.
+        \item شما هر هفته پیشرفت آن را در GitHub می‌بینید.
+        \item لازم نیست کپی کنید؛ فقط اصول را یاد بگیرید.
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{تسک هفتهٔ آینده}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries\myaccent{تسک شما (تیم‌ها)}}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.3em]
+        \item تیم ۳-۴ نفره تشکیل دهید
+        \item پروژه انتخاب کنید
+        \item Repository در GitHub بسازید
+        \item \lr{01-vision.md} و \lr{personas.md} بنویسید
+        \item ۱۰ User Story اولیه بنویسید
+    \end{itemize}
+}
+
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries سؤالی دارید؟}
+        \vspace{1.5cm}
+        {\LARGE\myaccent{به امید یک ترم پربار}}
+    \end{center}
+}
+
+\end{document}
+\documentclass[14pt, a4paper, 
+landscape]{extarticle}
+
+% ---------- پکیج‌های پایه ----------
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\geometry{margin=1cm}
+
+% ---------- xepersian (آخرین پکیج) ----------
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+% ---------- رنگ‌ها ----------
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+\definecolor{bg}{RGB}{245, 240, 232}
+\definecolor{darkbg}{RGB}{92, 58, 26}
+
+% ---------- تنظیمات صفحه ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\textcolor{primary}{مهندسی نرم‌افزار — جلسهٔ ۱}}
+\fancyfoot[C]{\textcolor{primary}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\headheight}{15pt}
+
+% ---------- فاصله پاراگراف ----------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% ---------- دستور برای اسلاید ----------
+\newcommand{\slide}[1]{%
+    \newpage
+    \begin{tcolorbox}[
+        colback=bg,
+        colframe=primary,
+        boxrule=1.5pt,
+        arc=4mm,
+        left=8mm, right=8mm, top=6mm, bottom=6mm,
+        width=\textwidth,
+        height=0.85\textheight
+    ]
+    #1
+    \end{tcolorbox}
+}
+
+\newcommand{\slidetitle}[1]{%
+    \begin{center}
+        {\LARGE\bfseries\textcolor{primary}{#1}}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\bigtext}[1]{%
+    \begin{center}
+        {\Huge\bfseries #1}
+    \end{center}
+}
+
+\newcommand{\myaccent}[1]{\textcolor{accent}{#1}}
+
+% ============================================================
+\begin{document}
+
+\pagestyle{empty}
+
+% ---------- اسلاید عنوان ----------
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[darkbg] (current page.north west) rectangle (current page.south east);
+\end{tikzpicture}
+
+\begin{center}
+    \vspace*{4cm}
+    {\color{white}\Huge\bfseries مهندسی نرم‌افزار}
+    
+    \vspace{1cm}
+    
+    {\color{accent}\LARGE جلسهٔ ۱ — معرفی درس}
+    
+    \vspace{2cm}
+    
+    {\color{white}\Large ابراهیم فضلی}
+    
+    \vspace{0.5cm}
+    
+    {\color{white}\large ترم ۱۴۰۴}
+\end{center}
+
+\pagestyle{fancy}
+
+% ---------- اسلاید ۲ ----------
+\slide{
+    \slidetitle{یک تصویر، یک سؤال}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries نرم‌افزار هم می‌تواند شکست بخورد.}
+        
+        \vspace{1.5cm}
+        
+        {\Huge\bfseries\myaccent{چرا؟}}
+    \end{center}
+}
+
+% ---------- اسلاید ۳ ----------
+\slide{
+    \slidetitle{آمار تکان‌دهنده}
+    \vspace{1cm}
+    \begin{center}
+        {\fontsize{80}{90}\selectfont\bfseries\myaccent{۷۰٪}}
+        
+        \vspace{1cm}
+        
+        {\Large پروژه‌های نرم‌افزاری شکست می‌خورند،}
+        
+        {\Large دیر تحویل می‌شوند یا از بودجه فراتر می‌روند.}
+        
+        \vspace{1.5cm}
+        
+        {\small منبع: Standish Group Chaos Report}
+    \end{center}
+}
+
+% ---------- اسلاید ۴ ----------
+\slide{
+    \slidetitle{کدنویس vs مهندس نرم‌افزار}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{p{6cm}p{6cm}}
+            \toprule
+            \textbf{\large کدنویس} & \textbf{\large مهندس نرم‌افزار} \\
+            \midrule
+            \rule{0pt}{1em}کد می‌نویسد & مسئله را حل می‌کند \\
+            \hline
+            \rule{0pt}{1em}تنها کار می‌کند & در تیم کار می‌کند \\
+            \hline
+            \rule{0pt}{1em}به امروز فکر می‌کند & به ۵ سال بعد فکر می‌کند \\
+            \hline
+            \rule{0pt}{1em}تست را ضروری نمی‌داند & تست را بخشی از کار می‌داند \\
+            \hline
+            \rule{0pt}{1em}مشتری را نمی‌شناسد & مشتری را می‌فهمد \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+% ---------- اسلاید ۵ ----------
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries مهندسی نرم‌افزار}
+        
+        \vspace{1.5cm}
+        
+        {\LARGE\myaccent{= ساختن چیزی که کار می‌کند،}}
+        
+        \vspace{0.5cm}
+        
+        {\LARGE\myaccent{در زمان مشخص، با تیم، و قابل نگهداری.}}
+    \end{center}
+}
+
+% ---------- اسلاید ۶ ----------
+\slide{
+    \slidetitle{اهداف درس}
+    \vspace{0.5cm}
+    {\large در پایان این درس می‌توانید:}
+    \vspace{0.5cm}
+    \begin{enumerate}[itemsep=0.5em]
+        \item نیازمندی‌ها را از مشتری استخراج کنید.
+        \item معماری و طراحی یک سیستم را انجام دهید.
+        \item در یک تیم چابک کار کنید.
+        \item کد را تست، بازبینی و CI/CD تحویل دهید.
+        \item کیفیت، ریسک و بدهی فنی را ارزیابی کنید.
+    \end{enumerate}
+}
+
+% ---------- اسلاید ۷ ----------
+\slide{
+    \slidetitle{نقشهٔ ۱۴ هفته}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{cl}
+            \toprule
+            \textbf{هفته} & \textbf{موضوع} \\
+            \midrule
+            \rule{0pt}{1em}۱-۲ & نیازمندی‌ها \\
+            \hline
+            \rule{0pt}{1em}۳-۴ & مدل‌سازی و معماری \\
+            \hline
+            \rule{0pt}{1em}۵ & Sprint 1 Review \\
+            \hline
+            \rule{0pt}{1em}۶-۷ & طراحی شیءگرا و الگوها \\
+            \hline
+            \rule{0pt}{1em}۸ & میان‌ترم \\
+            \hline
+            \rule{0pt}{1em}۹-۱۰ & تست و CI/CD \\
+            \hline
+            \rule{0pt}{1em}۱۱ & Sprint 2 Review \\
+            \hline
+            \rule{0pt}{1em}۱۲-۱۳ & کیفیت، ریسک، DevOps \\
+            \hline
+            \rule{0pt}{1em}۱۴ & Demo Day \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+% ---------- اسلاید ۸ ----------
+\slide{
+    \slidetitle{پروژهٔ من: هوم‌استور}
+    \vspace{0.5cm}
+    \begin{center}
+        {\Large\bfseries یک فروشگاه آنلاین لوازم خانگی}
+    \end{center}
+    
+    \vspace{1cm}
+    
+    \begin{itemize}[itemsep=0.5em]
+        \item من در طول ترم این پروژه را زنده می‌سازم.
+        \item هدف: نشان دادن نمونهٔ عملی از هر مفهوم درس.
+        \item شما هر هفته پیشرفت آن را در GitHub می‌بینید.
+        \item لازم نیست کپی کنید؛ فقط اصول را یاد بگیرید.
+    \end{itemize}
+}
+
+% ---------- اسلاید ۹ ----------
+\slide{
+    \slidetitle{تسک هفتهٔ آینده}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries\myaccent{تسک شما (تیم‌ها)}}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.3em]
+        \item تیم ۳-۴ نفره تشکیل دهید
+        \item پروژه انتخاب کنید
+        \item Repository در GitHub بسازید
+        \item \lr{01-vision.md} و \lr{personas.md} بنویسید
+        \item ۱۰ User Story اولیه بنویسید
+    \end{itemize}
+}
+
+% ---------- اسلاید ۱۰ ----------
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries سؤالی دارید؟}
+        
+        \vspace{1.5cm}
+        
+        {\LARGE\myaccent{به امید یک ترم پربار}}
+    \end{center}
+}
+
+\end{document}
