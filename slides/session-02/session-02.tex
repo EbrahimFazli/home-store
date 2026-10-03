@@ -1,0 +1,432 @@
+\documentclass[14pt, a4paper, landscape]{extarticle}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\geometry{margin=1cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+\definecolor{bg}{RGB}{245, 240, 232}
+\definecolor{darkbg}{RGB}{92, 58, 26}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\textcolor{primary}{مهندسی نرم‌افزار — جلسهٔ ۲}}
+\fancyfoot[C]{\textcolor{primary}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\slide}[1]{%
+    \newpage
+    \begin{center}
+    \begin{minipage}[t]{0.95\textwidth}
+    \vspace{0.5cm}
+    #1
+    \vspace{0.5cm}
+    \end{minipage}
+    \end{center}
+}
+
+\newcommand{\slidetitle}[1]{%
+    \begin{center}
+        {\LARGE\bfseries\textcolor{primary}{#1}}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\myaccent}[1]{\textcolor{accent}{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[darkbg] (current page.north west) rectangle (current page.south 
+east);
+\end{tikzpicture}
+
+\begin{center}
+    \vspace*{4cm}
+    {\color{white}\Huge\bfseries مهندسی نرم‌افزار}
+    
+    \vspace{1cm}
+    
+    {\color{accent}\LARGE جلسهٔ ۲ — مهندسی نیازمندی‌ها}
+    
+    \vspace{2cm}
+    
+    {\color{white}\Large ابراهیم فضلی}
+    
+    \vspace{0.5cm}
+    
+    {\color{white}\large ترم ۱۴۰۴}
+\end{center}
+
+\pagestyle{fancy}
+
+
+
+
+
+\slide{
+    \slidetitle{مرور جلسهٔ ۱}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item مهندسی نرم‌افزار = حل مسئله، نه فقط کد زدن
+        \item من پروژهٔ هوم‌استور را می‌سازم؛ شما پروژهٔ خودتان را
+        \item تیم شما مسئول موفقیت پروژهٔ خودش است
+        \item تسک: تشکیل تیم + انتخاب پروژه + Vision + Personas
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{چرا نیازمندی‌ها مهم هستند؟}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries\myaccent{۷۰٪ شکست پروژه‌ها ناشی از نیازمندی‌های ضعیف است.}}
+        
+        \vspace{1.5cm}
+        
+        {\large اگر نیازمندی را اشتباه بفهمی،}
+        
+        {\large تمام کارهای بعدی هم اشتباه می‌شوند.}
+    \end{center}
+}
+
+
+\slide{
+    \slidetitle{چرخهٔ حیات نیازمندی‌ها}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries ۴ مرحلهٔ اصلی:}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{enumerate}[itemsep=0.7em]
+        \item {\large\textbf{\textcolor{primary}{Elicitation}} — کشف نیازمندی از مشتری}
+        \item {\large\textbf{\textcolor{primary}{Analysis}} — تحلیل و اولویت‌بندی}
+        \item {\large\textbf{\textcolor{primary}{Documentation}} — مستندسازی}
+        \item {\large\textbf{\textcolor{primary}{Validation}} — اعتبارسنجی با مشتری}
+    \end{enumerate}
+    \vspace{1cm}
+    \begin{center}
+        {\large\myaccent{این چرخه در طول پروژه تکرار می‌شود.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{تکنیک‌های کشف نیازمندی}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large\textbf{مصاحبه} — گفت‌وگوی مستقیم با مشتری}
+        \item {\large\textbf{مشاهده} — دیدن کار واقعی مشتری}
+        \item {\large\textbf{پرسشنامه} — برای کاربران زیاد}
+        \item {\large\textbf{کارگاه} — جلسهٔ گروهی}
+        \item {\large\textbf{نمونهٔ اولیه} — برای بازخورد}
+        \item {\large\textbf{طوفان فکری} — ایده‌پردازی تیمی}
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{بهترین روش: ترکیب چند تکنیک}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{انواع نیازمندی‌ها}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        {\large\bfseries\textcolor{primary}{Functional:}}
+        \vspace{0.3cm}
+        
+        {\small سیستم چه کاری انجام می‌دهد؟}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item نمایش محصولات
+            \item ثبت سفارش
+            \item جست‌وجو
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        {\large\bfseries\myaccent{Non-functional:}}
+        \vspace{0.3cm}
+        
+        {\small سیستم چطور کار می‌کند؟}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item سرعت < ۲ ثانیه
+            \item امنیت
+            \item دسترسی‌پذیری
+        \end{itemize}
+    \end{minipage}
+}
+
+\slide{
+    \slidetitle{Non-functional Requirements}
+    \vspace{0.5cm}
+    {\large نیازمندی‌های غیرکاربری — کیفیت سیستم}
+    \vspace{0.8cm}
+    \begin{center}
+        \begin{tabular}{ll}
+            \toprule
+            \textbf{دسته} & \textbf{مثال} \\
+            \midrule
+            Performance & بارگذاری < ۲ ثانیه \\
+            \hline
+            Security & رمزنگاری گذرواژه \\
+            \hline
+            Usability & کاربر در ۳ کلیک سفارش دهد \\
+            \hline
+            Availability & ۹۹.۵٪ در دسترس \\
+            \hline
+            Scalability & پشتیبانی از ۱۰۰۰ کاربر همزمان \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{User Story چیست؟}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries یک توصیف کوتاه از نیازمندی، از دید کاربر.}
+        
+        \vspace{2cm}
+        
+        {\large\bfseries\myaccent{به‌عنوان [نقش]،}}
+        
+        {\large\bfseries\myaccent{می‌خواهم [کاری]،}}
+        
+        {\large\bfseries\myaccent{تا [ارزش].}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{نمونه: HomeStore}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.8em]
+        \item {\large\textbf{US-01:} به‌عنوان مشتری می‌خواهم محصولات را ببینم تا انتخاب کنم.}
+        \vspace{0.3cm}
+        \item {\large\textbf{US-02:} به‌عنوان مشتری می‌خواهم بر اساس برند فیلتر کنم تا سریع‌تر پیدا کنم.}
+        \vspace{0.3cm}
+        \item {\large\textbf{US-03:} به‌عنوان ادمین می‌خواهم محصول جدید اضافه کنم تا کاتالوگ به‌روز بماند.}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{معیارهای INVEST}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item \textbf{I}ndependent — مستقل
+        \item \textbf{N}egotiable — قابل مذاکره
+        \item \textbf{V}aluable — ارزشمند
+        \item \textbf{E}stimable — قابل تخمین
+        \item \textbf{S}mall — کوچک
+        \item \textbf{T}estable — قابل تست
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{Acceptance Criteria}
+    \vspace{0.5cm}
+    {\large شرط‌هایی که می‌گویند یک User Story چه وقت «تمام» است.}
+    
+    \vspace{1cm}
+    
+    {\bfseries\textcolor{primary}{مثال برای US-01:}}
+    \vspace{0.3cm}
+    \begin{itemize}[itemsep=0.3em]
+        \item صفحهٔ محصولات با ۲۰ آیتم نمایش داده شود
+        \item هر آیتم شامل تصویر، نام، و قیمت باشد
+        \item بارگذاری < ۲ ثانیه باشد
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{Product Backlog}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries لیست مرتب‌شده از تمام User Storyها}
+    \end{center}
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}[itemsep=0.5em]
+        \item اولویت‌بندی‌شده (بالا = مهم‌تر)
+        \item در طول پروژه تغییر می‌کند
+        \item مالک آن Product Owner است
+        \item ابزار: GitHub Projects
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{SRS — سند رسمی نیازمندی‌ها}
+    \vspace{0.5cm}
+    {\large Software Requirements Specification}
+    \vspace{0.8cm}
+    {\bfseries\textcolor{primary}{ساختار SRS:}}
+    \vspace{0.3cm}
+    \begin{enumerate}[itemsep=0.3em]
+        \item مقدمه (هدف، دامنه، تعاریف)
+        \item توصیف کلی (محصول، کاربران)
+        \item نیازمندی‌های Functional
+        \item نیازمندی‌های Non-functional
+        \item رابط‌های خارجی
+    \end{enumerate}
+}
+
+\slide{
+    \slidetitle{اعتبارسنجی نیازمندی}
+    \vspace{0.5cm}
+    {\large چطور مطمئن شویم نیازمندی درست است؟}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large\textbf{Review با مشتری} — تأیید نهایی}
+        \item {\large\textbf{نمونهٔ اولیه} — Prototype}
+        \item {\large\textbf{Use Case} — سناریوی واقعی}
+        \item {\large\textbf{Test Case} — آیا قابل تست است؟}
+        \item {\large\textbf{Checklist} — آیا INVEST رعایت شده؟}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{اولویت‌بندی MoSCoW}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.7em]
+        \item \textbf{\textcolor{primary}{Must:}} بدون این، پروژه بی‌معنی است
+        \item \textbf{\textcolor{accent}{Should:}} مهم، اما اگر وقت نشد بعداً
+        \item \textbf{Could:} خوب است داشته باشیم
+        \item \textbf{Won't:} در این نسخه نداریم
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{مصاحبه با مشتری — نمونهٔ عملی}
+    \vspace{0.5cm}
+    {\large از خانم رضایی پرسیدیم:}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large\textbf{سؤال:} الان سفارش‌ها را چطور ثبت می‌کنید؟}
+        \item {\large\textbf{پاسخ:} تلفنی، در دفتر یادداشت می‌کنم.}
+        \vspace{0.3cm}
+        \item {\large\textbf{سؤال:} بزرگ‌ترین مشکل شما چیست؟}
+        \item {\large\textbf{پاسخ:} مشتری نمی‌داند چه چیزی موجود است.}
+        \vspace{0.3cm}
+        \item {\large\textbf{سؤال:} چه چیزی هرگز نباید اتفاق بیفتد؟}
+        \item {\large\textbf{پاسخ:} سفارش اشتباه یا دوبار ثبت شود.}
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{مصاحبه = قلب کشف نیازمندی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{اشتباهات رایج در نیازمندی‌ها}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large\textbf{مبهم:} «سیستم باید سریع باشد»}
+        \item {\large\textbf{متناقض:} «ساده باشد ولی همه‌کاره»}
+        \item {\large\textbf{غیرقابل تست:} «کاربر راضی باشد»}
+        \item {\large\textbf{راه‌حل به‌جای نیاز:} «دکمهٔ آبی بگذار»}
+        \item {\large\textbf{کپی از رقیب:} «مثل دیجی‌کالا»}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        {\large\bfseries\myaccent{نیازمندی خوب = قابل اندازه‌گیری}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{تمرین سریع}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries ۵ User Story برای پروژهٔ خودتان بنویسید.}
+        
+        \vspace{1.5cm}
+        
+        {\large هر User Story باید:}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item قالب «به‌عنوان... می‌خواهم... تا...» را داشته باشد
+            \item INVEST را رعایت کند
+            \item حداقل ۲ Acceptance Criteria داشته باشد
+        \end{itemize}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{کارگاه تیمی}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large ۲۰ دقیقه}
+        \item هر تیم ۱۰ User Story بنویسید
+        \item هر Story را با MoSCoW اولویت‌بندی کنید
+        \item برای ۳ Story اول Acceptance Criteria بنویسید
+        \item من بین تیم‌ها می‌چرخم و کمک می‌کنم
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{سه برداشت کلیدی}
+    \vspace{1cm}
+    \begin{enumerate}[itemsep=0.8em]
+        \item {\large نیازمندی‌ها را کشف می‌کنیم، نه اختراع.}
+        \item {\large User Story = زبان مشترک تیم و مشتری.}
+        \item {\large Backlog زنده است؛ هر Sprint به‌روز می‌شود.}
+    \end{enumerate}
+}
+
+\slide{
+    \slidetitle{تسک هفتهٔ آینده}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\textcolor{primary}{تسک شما:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item ۱۰ User Story در Repository تیم
+            \item اولویت‌بندی MoSCoW
+            \item Acceptance Criteria برای ۳ Story اول
+            \item Product Backlog در GitHub Projects
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\myaccent{تسک من:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item user-stories.md در HomeStore
+            \item Product Backlog نمونه
+            \item قالب User Story برای تیم‌ها
+        \end{itemize}
+    \end{minipage}
+}
+
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries سؤالی دارید؟}
+        
+        \vspace{1.5cm}
+        
+        {\LARGE\myaccent{به امید یک ترم پربار}}
+    \end{center}
+}
+
+\end{document}
