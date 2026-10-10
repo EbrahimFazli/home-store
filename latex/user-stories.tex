@@ -1,0 +1,278 @@
+\documentclass[12pt, a4paper]{article}
+
+% ---------- پکیج‌های پایه ----------
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+
+% ---------- xepersian (آخرین پکیج) ----------
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\geometry{margin=2.5cm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+\setlist{nosep, leftmargin=*}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small سند داستان‌های کاربر — هوم‌استور}
+\fancyhead[L]{\small نسخهٔ ۱.۰}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\linespread{1.4}
+
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge سند داستان‌های کاربر}\\[0.3cm]
+    \textbf{\LARGE پروژهٔ هوم‌استور}\\[0.5cm]
+    \large User Stories
+}
+\author{
+    تهیه‌کننده: ابراهیم فضلی\\
+    ترم: ۱۴۰۴
+}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{نام پروژه} & هوم‌استور (HomeStore) \\
+\hline
+\textbf{نسخهٔ سند} & ۱.۰ \\
+\hline
+\textbf{تاریخ} & \today \\
+\hline
+\textbf{تهیه‌کننده} & ابراهیم فضلی \\
+\hline
+\textbf{وضعیت} & پیش‌نویس \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{مقدمه}
+
+\subsection{هدف سند}
+این سند داستان‌های کاربر (User Stories) پروژهٔ هوم‌استور را تعریف می‌کند.
+
+\subsection{قالب User Story}
+هر User Story به این شکل نوشته می‌شود:
+
+\begin{quote}
+\textbf{به‌عنوان} [نقش]، \textbf{می‌خواهم} [کاری] \textbf{تا} [ارزش].
+\end{quote}
+
+\subsection{معیارهای INVEST}
+\begin{itemize}
+    \item \textbf{I}ndependent — مستقل
+    \item \textbf{N}egotiable — قابل مذاکره
+    \item \textbf{V}aluable — ارزشمند
+    \item \textbf{E}stimable — قابل تخمین
+    \item \textbf{S}mall — کوچک
+    \item \textbf{T}estable — قابل تست
+\end{itemize}
+
+\subsection{اولویت‌بندی MoSCoW}
+\begin{itemize}
+    \item \textbf{Must:} بدون این، پروژه بی‌معنی است
+    \item \textbf{Should:} مهم، اما اگر وقت نشد بعداً
+    \item \textbf{Could:} خوب است داشته باشیم
+    \item \textbf{Won't:} در این نسخه نداریم
+\end{itemize}
+
+% ============================================================
+\section{پرسوناهای مرجع}
+
+\begin{center}
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{پرسونا} & \textbf{نقش} & \textbf{اولویت} \\
+\hline
+مریم & مشتری & اول \\
+\hline
+خانم رضایی & ادمین & اول \\
+\hline
+رضا & انباردار & دوم \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{داستان‌های کاربر — Sprint 1}
+
+\subsection{کاتالوگ و کشف}
+
+\begin{center}
+\begin{tabular}{|c|p{9cm}|c|}
+\hline
+\textbf{ID} & \textbf{User Story} & \textbf{اولویت} \\
+\hline
+US-01 & به‌عنوان مشتری می‌خواهم محصولات را ببینم تا انتخاب کنم & Must \\
+\hline
+US-02 & به‌عنوان مشتری می‌خواهم بر اساس دسته‌بندی فیلتر کنم & Must \\
+\hline
+US-03 & به‌عنوان مشتری می‌خواهم بر اساس برند فیلتر کنم & Must \\
+\hline
+US-04 & به‌عنوان مشتری می‌خواهم بر اساس قیمت مرتب کنم & Must \\
+\hline
+US-05 & به‌عنوان مشتری می‌خواهم صفحهٔ جزئیات محصول را ببینم & Must \\
+\hline
+US-06 & به‌عنوان مشتری می‌خواهم محصول را به سبد اضافه کنم & Must \\
+\hline
+US-07 & به‌عنوان مشتری می‌خواهم سبد خریدم را ببینم & Must \\
+\hline
+US-08 & به‌عنوان مشتری می‌خواهم از سبد حذف کنم & Must \\
+\hline
+US-09 & به‌عنوان مشتری می‌خواهم تعداد را تغییر دهم & Should \\
+\hline
+US-10 & به‌عنوان مشتری می‌خواهم مبلغ کل را ببینم & Must \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{داستان‌های کاربر — Sprint 2}
+
+\subsection{تراکنش و مدیریت}
+
+\begin{center}
+\begin{tabular}{|c|p{9cm}|c|}
+\hline
+\textbf{ID} & \textbf{User Story} & \textbf{اولویت} \\
+\hline
+US-11 & به‌عنوان مشتری می‌خواهم سفارش ثبت کنم & Must \\
+\hline
+US-12 & به‌عنوان مشتری می‌خواهم فرم را با اعتبارسنجی پر کنم & Must \\
+\hline
+US-13 & به‌عنوان مشتری می‌خواهم محصولات را مقایسه کنم & Should \\
+\hline
+US-14 & به‌عنوان مشتری می‌خواهم وضعیت سفارشم را پیگیری کنم & Should \\
+\hline
+US-15 & به‌عنوان ادمین می‌خواهم محصول جدید اضافه کنم & Must \\
+\hline
+US-16 & به‌عنوان ادمین می‌خواهم محصول را ویرایش کنم & Must \\
+\hline
+US-17 & به‌عنوان ادمین می‌خواهم محصول را حذف کنم & Should \\
+\hline
+US-18 & به‌عنوان ادمین می‌خواهم سفارش‌ها را ببینم & Must \\
+\hline
+US-19 & به‌عنوان ادمین می‌خواهم وضعیت سفارش را تغییر دهم & Must \\
+\hline
+US-20 & به‌عنوان ادمین می‌خواهم گزارش فروش ببینم & Could \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{داستان‌های کاربر — Sprint 3}
+
+\subsection{کیفیت و انتشار}
+
+\begin{center}
+\begin{tabular}{|c|p{9cm}|c|}
+\hline
+\textbf{ID} & \textbf{User Story} & \textbf{اولویت} \\
+\hline
+US-21 & به‌عنوان ادمین می‌خواهم موجودی انبار را ببینم & Should \\
+\hline
+US-22 & به‌عنوان ادمین می‌خواهم هشدار کمبود بگیرم & Could \\
+\hline
+US-23 & به‌عنوان مشتری می‌خواهم جست‌وجوی سریع داشته باشم & Should \\
+\hline
+US-24 & به‌عنوان مشتری می‌خواهم محصولات مشابه را ببینم & Could \\
+\hline
+US-25 & به‌عنوان مشتری می‌خواهم نظرم را ثبت کنم & Could \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{معیار پذیرش نمونه}
+
+\subsection{US-01 — نمایش محصولات}
+
+\textbf{به‌عنوان:} مشتری \\
+\textbf{می‌خواهم:} محصولات را ببینم \\
+\textbf{تا:} انتخاب کنم
+
+\textbf{معیار پذیرش:}
+\begin{itemize}
+    \item صفحهٔ محصولات با حداقل ۲۰ آیتم نمایش داده شود
+    \item هر آیتم شامل تصویر، نام، قیمت باشد
+    \item بارگذاری صفحه < ۲ ثانیه باشد
+    \item صفحه واکنش‌گرا باشد
+\end{itemize}
+
+\subsection{US-06 — افزودن به سبد خرید}
+
+\textbf{به‌عنوان:} مشتری \\
+\textbf{می‌خواهم:} محصول را به سبد اضافه کنم \\
+\textbf{تا:} بعداً خرید کنم
+
+\textbf{معیار پذیرش:}
+\begin{itemize}
+    \item دکمهٔ «افزودن به سبد» در صفحه باشد
+    \item سبد بلافاصله به‌روز شود
+    \item تعداد کل در هدر نمایش داده شود
+    \item پیام موفقیت نمایش داده شود
+\end{itemize}
+
+\subsection{US-11 — ثبت سفارش}
+
+\textbf{به‌عنوان:} مشتری \\
+\textbf{می‌خواهم:} سفارش ثبت کنم \\
+\textbf{تا:} محصول را دریافت کنم
+
+\textbf{معیار پذیرش:}
+\begin{itemize}
+    \item فرم شامل نام، آدرس، تلفن باشد
+    \item اعتبارسنجی همه فیلدها انجام شود
+    \item بعد از ثبت، شماره پیگیری نمایش داده شود
+\end{itemize}
+
+% ============================================================
+\appendix
+\section{تاریخچهٔ تغییرات}
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{نسخه} & \textbf{تاریخ} & \textbf{تغییرات} & \textbf{تهیه‌کننده} \\
+\hline
+۱.۰ & \today & نسخهٔ اولیه & ابراهیم فضلی \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
