@@ -1,0 +1,484 @@
+\documentclass[14pt, a4paper, landscape]{extarticle}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\geometry{margin=1cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+\definecolor{bg}{RGB}{245, 240, 232}
+\definecolor{darkbg}{RGB}{92, 58, 26}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\textcolor{primary}{مهندسی نرم‌افزار — جلسهٔ ۳}}
+\fancyfoot[C]{\textcolor{primary}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\slide}[1]{%
+    \newpage
+    \begin{center}
+    \begin{minipage}[t]{0.95\textwidth}
+    \vspace{0.5cm}
+    #1
+    \vspace{0.5cm}
+    \end{minipage}
+    \end{center}
+}
+
+\newcommand{\slidetitle}[1]{%
+    \begin{center}
+        {\LARGE\bfseries\textcolor{primary}{#1}}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\myaccent}[1]{\textcolor{accent}{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[darkbg] (current page.north west) rectangle (current page.south 
+east);
+\end{tikzpicture}
+
+\begin{center}
+    \vspace*{4cm}
+    {\color{white}\Huge\bfseries مهندسی نرم‌افزار}
+    
+    \vspace{1cm}
+    
+    {\color{accent}\LARGE جلسهٔ ۳ — فرآیندهای توسعه نرم‌افزار}
+    
+    \vspace{2cm}
+    
+    {\color{white}\Large ابراهیم فضلی}
+    
+    \vspace{0.5cm}
+    
+    {\color{white}\large ترم ۱۴۰۴}
+\end{center}
+
+\pagestyle{fancy}
+
+
+\slide{
+    \slidetitle{مرور جلسهٔ ۲}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item نیازمندی‌ها را کشف می‌کنیم، نه اختراع
+        \item User Story = زبان مشترک تیم و مشتری
+        \item INVEST و Acceptance Criteria
+        \item Product Backlog و MoSCoW
+        \item تسک: ۱۰ User Story + Backlog در GitHub Projects
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{چرا فرآیند مهم است؟}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries\myaccent{فرآیند = نقشهٔ راه تیم}}
+        \vspace{1.5cm}
+        {\large بدون فرآیند، هر کس راه خودش را می‌رود.}
+        \vspace{0.5cm}
+        {\large با فرآیند، تیم هماهنگ کار می‌کند.}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{چرخهٔ حیات نرم‌افزار}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries ۶ مرحلهٔ اصلی:}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{enumerate}[itemsep=0.5em]
+        \item {\large\textbf{Requirements} — کشف نیازمندی}
+        \item {\large\textbf{Design} — طراحی}
+        \item {\large\textbf{Implementation} — پیاده‌سازی}
+        \item {\large\textbf{Testing} — تست}
+        \item {\large\textbf{Deployment} — استقرار}
+        \item {\large\textbf{Maintenance} — نگهداری}
+    \end{enumerate}
+}
+
+\slide{
+    \slidetitle{Waterfall — آبشاری}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries مدل خطی و ترتیبی}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{center}
+        {\large Requirements → Design → Code → Test → Deploy}
+    \end{center}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.4em]
+        \item هر مرحله کامل می‌شود، بعد مرحلهٔ بعد
+        \item بازگشت به عقب سخت است
+        \item مشتری تا آخر چیزی نمی‌بیند
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{مزایا و معایب Waterfall}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        {\large\bfseries\textcolor{primary}{مزایا:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item ساده و قابل فهم
+            \item مستندسازی کامل
+            \item مناسب پروژه‌های ثابت
+            \item بودجهٔ قابل پیش‌بینی
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        {\large\bfseries\myaccent{معایب:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item انعطاف‌ناپذیر
+            \item بازخورد دیرهنگام
+            \item ریسک بالا
+            \item تغییرات گران
+        \end{itemize}
+    \end{minipage}
+}
+
+\slide{
+    \slidetitle{چه زمانی Waterfall مناسب است؟}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.7em]
+        \item {\large نیازمندی‌ها ثابت و مشخص هستند}
+        \item {\large پروژه‌های کوچک و کوتاه}
+        \item {\large پروژه‌های دولتی و پیمانکاری}
+        \item {\large سیستم‌های حیاتی (پزشکی، هوافضا)}
+        \item {\large وقتی تغییرات گران است}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        {\large\myaccent{مثال: ساخت پل، سیستم بانکی قدیمی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Agile — چابک}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries مدل تکرارشونده و افزایشی}
+    \end{center}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large تحویل تدریجی در دوره‌های کوتاه}
+        \item {\large بازخورد مداوم از مشتری}
+        \item {\large انعطاف در برابر تغییر}
+        \item {\large همکاری نزدیک تیم و مشتری}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{مانیفست Agile — ۴ ارزش}
+    \vspace{0.5cm}
+    \begin{enumerate}[itemsep=0.8em]
+        \item {\large\textbf{افراد و تعامل} مهم‌تر از فرآیند و ابزار}
+        \item {\large\textbf{نرم‌افزار کارکننده} مهم‌تر از مستندات جامع}
+        \item {\large\textbf{همکاری با مشتری} مهم‌تر از مذاکرهٔ قرارداد}
+        \item {\large\textbf{پاسخ به تغییر} مهم‌تر از پیروی از برنامه}
+    \end{enumerate}
+}
+
+
+\slide{
+    \slidetitle{Scrum چیست؟}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries محبوب‌ترین چارچوب Agile}
+    \end{center}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large مبتنی بر تکرارهای کوتاه (Sprint)}
+        \item {\large تیم خودسازمان‌ده}
+        \item {\large تحویل تدریجی محصول}
+        \item {\large بازخورد مداوم}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{نقش‌های Scrum}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.8em]
+        \item {\large\textbf{\textcolor{primary}{Product Owner}} — تصمیم می‌گیرد چه چیزی بسازیم}
+        \vspace{0.3cm}
+        \item {\large\textbf{\textcolor{primary}{Scrum Master}} — جلسات و موانع را مدیریت می‌کند}
+        \vspace{0.3cm}
+        \item {\large\textbf{\textcolor{primary}{Development Team}} — کد می‌نویسد و تحویل می‌دهد}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        {\myaccent{در تیم‌های کوچک، نقش‌ها می‌چرخند}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{رویدادهای Scrum}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large\textbf{Sprint} — بازهٔ ۱-۴ هفته‌ای}
+        \item {\large\textbf{Sprint Planning} — برنامه‌ریزی Sprint}
+        \item {\large\textbf{Daily Standup} — جلسهٔ ۱۵ دقیقه‌ای روزانه}
+        \item {\large\textbf{Sprint Review} — نمایش محصول به مشتری}
+        \item {\large\textbf{Retrospective} — بازنگری تیم}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{آرتیفکت‌های Scrum}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.8em]
+        \item {\large\textbf{Product Backlog} — لیست تمام کارها}
+        \vspace{0.3cm}
+        \item {\large\textbf{Sprint Backlog} — کارهای Sprint فعلی}
+        \vspace{0.3cm}
+        \item {\large\textbf{Increment} — محصول قابل تحویل}
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{Sprint چطور کار می‌کند؟}
+    \vspace{0.3cm}
+    \begin{center}
+        {\large\bfseries چرخهٔ Sprint:}
+    \end{center}
+    \vspace{0.3cm}
+    \begin{center}
+        {\large Sprint Planning → Daily (هر روز) → Sprint Review → Retrospective}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{lp{3.5cm}p{6cm}}
+            \toprule
+            \textbf{مرحله} & \textbf{مدت} & \textbf{هدف} \\
+            \midrule
+            Sprint Planning & ۲-۴ ساعت & تعیین کار Sprint \\
+            \hline
+            Daily Standup & ۱۵ دقیقه & هماهنگی روزانه \\
+            \hline
+            Sprint Review & ۱-۲ ساعت & نمایش به مشتری \\
+            \hline
+            Retrospective & ۱-۲ ساعت & بازنگری فرآیند \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{هر Sprint = ۱-۴ هفته، خروجی = محصول قابل استفاده}}
+    \end{center}
+}
+
+
+\slide{
+    \slidetitle{Daily Standup — جلسهٔ روزانه}
+    \vspace{0.3cm}
+    \begin{center}
+        {\large\bfseries ۱۵ دقیقه، هر روز، ایستاده}
+    \end{center}
+    \vspace{0.5cm}
+    {\large\bfseries\textcolor{primary}{سه سؤال اصلی:}}
+    \vspace{0.3cm}
+    \begin{enumerate}[itemsep=0.5em]
+        \item {\large دیروز چه کاری انجام دادم؟}
+        \item {\large امروز چه کاری انجام می‌دهم؟}
+        \item {\large چه موانعی دارم؟}
+    \end{enumerate}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\myaccent{هدف: هماهنگی تیم، نه گزارش به مدیر}}
+    \end{center}
+}
+
+
+
+\slide{
+    \slidetitle{Scrum در HomeStore}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries ۳ Sprint برای ۱۴ هفته}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{center}
+        \begin{tabular}{clp{6cm}}
+            \toprule
+            \textbf{Sprint} & \textbf{هفته} & \textbf{هدف} \\
+            \midrule
+            1 & ۱-۵ & کاتالوگ + جست‌وجو + سبد خرید \\
+            \hline
+            2 & ۶-۱۱ & سفارش + مقایسه + پنل ادمین \\
+            \hline
+            3 & ۱۲-۱۴ & تست + استقرار + مستندات \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+
+\slide{
+    \slidetitle{Kanban — کانبان}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries مدل جریان پیوسته}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large تختهٔ Kanban با ستون‌ها}
+        \item {\large کارت‌ها از چپ به راست حرکت می‌کنند}
+        \item {\large محدودیت کار همزمان (WIP)}
+        \item {\large بدون Sprint، جریان پیوسته}
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مناسب برای پشتیبانی و DevOps}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{XP — Extreme Programming}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries تمرکز روی کیفیت کد}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item {\large\textbf{Pair Programming} — دو نفر، یک کامپیوتر}
+        \item {\large\textbf{TDD} — تست قبل از کد}
+        \item {\large\textbf{Refactoring} — بهبود مداوم کد}
+        \item {\large\textbf{CI} — ادغام مداوم}
+        \item {\large\textbf{Small Releases} — انتشار مکرر}
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{مناسب برای تیم‌های کوچک و فنی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{مقایسه Scrum / Kanban / XP}
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{tabular}{lp{3.5cm}p{3.5cm}p{3.5cm}}
+            \toprule
+            & \textbf{Scrum} & \textbf{Kanban} & \textbf{XP} \\
+            \midrule
+            Sprint & ۱-۴ هفته & ندارد & ۱-۲ هفته \\
+            \hline
+            تغییر & در پایان Sprint & هر زمان & هر زمان \\
+            \hline
+            تمرکز & مدیریت & جریان & کیفیت کد \\
+            \hline
+            مناسب & پروژه‌های جدید & پشتیبانی & تیم فنی \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{کدام فرآیند برای شما؟}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.7em]
+        \item {\large\textbf{پروژهٔ جدید با مشتری نامشخص:} Scrum}
+        \item {\large\textbf{پشتیبانی و کارهای جاری:} Kanban}
+        \item {\large\textbf{تیم فنی و کیفیت‌محور:} XP}
+        \item {\large\textbf{پروژهٔ ثابت و دولتی:} Waterfall}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        {\large\bfseries\myaccent{در این درس: Scrum سبک‌شده}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{تمرین: انتخاب فرآیند}
+    \vspace{1cm}
+    \begin{center}
+        {\Large\bfseries در تیم خود بحث کنید:}
+    \end{center}
+    \vspace{1cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item {\large پروژهٔ شما کدام فرآیند را می‌خواهد؟}
+        \item {\large چرا Scrum را انتخاب می‌کنید؟}
+        \item {\large چه چیزی از Kanban یا XP می‌توانید اضافه کنید؟}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        {\myaccent{۱۰ دقیقه بحث گروهی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{سه برداشت کلیدی}
+    \vspace{1cm}
+    \begin{enumerate}[itemsep=0.8em]
+        \item {\large فرآیند = نقشهٔ راه، نه زندان}
+        \item {\large Agile پاسخ به تغییر است}
+        \item {\large Scrum محبوب‌ترین چارچوب Agile}
+    \end{enumerate}
+}
+
+\slide{
+    \slidetitle{تسک هفتهٔ آینده}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\textcolor{primary}{تسک شما:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item نوشتن User Storyها (۱۰ عدد)
+            \item اولویت‌بندی MoSCoW
+            \item Product Backlog در GitHub Projects
+            \item تعیین Sprint 1 Goal
+            \item شروع طراحی معماری
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\myaccent{تسک من:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item user-stories.md در HomeStore
+            \item قالب Sprint Report
+            \item مستندات معماری
+            \item آماده‌سازی Sprint 1
+        \end{itemize}
+    \end{minipage}
+}
+
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries سؤالی دارید؟}
+        \vspace{1.5cm}
+        {\LARGE\myaccent{به امید یک ترم پربار}}
+    \end{center}
+}
+
+\end{document}
