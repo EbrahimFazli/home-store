@@ -1,0 +1,783 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amssymb}
+
+\geometry{margin=2.5cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\setlist{nosep, leftmargin=*}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small جزوهٔ مطالعه — جلسهٔ ۵}
+\fancyhead[L]{\small Sprint 1 Review}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\linespread{1.4}
+
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge جزوهٔ مطالعه}\\[0.3cm]
+    \textbf{\LARGE جلسهٔ ۵: Sprint 1 Review}\\[0.5cm]
+    \large مهندسی نرم‌افزار
+}
+\author{
+    تهیه‌کننده: ابراهیم فضلی\\
+    ترم: ۱۴۰۴
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{درس} & مهندسی نرم‌افزار \\
+\hline
+\textbf{جلسه} & ۵ \\
+\hline
+\textbf{موضوع} & Sprint 1 Review و Retrospective \\
+\hline
+\textbf{زمان مطالعه} & ۲-۳ ساعت \\
+\hline
+\textbf{پیش‌نیاز} & جلسات ۱-۴ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{مقدمه}
+
+\subsection{چرا این جلسه مهم است؟}
+در جلسات قبل یاد گرفتیم:
+\begin{itemize}
+    \item \textbf{جلسهٔ ۱:} مهندسی نرم‌افزار چیست
+    \item \textbf{جلسهٔ ۲:} چطور نیازمندی‌ها را کشف کنیم
+    \item \textbf{جلسهٔ ۳:} فرآیندهای توسعه (Scrum)
+    \item \textbf{جلسهٔ ۴:} مدل‌سازی و معماری
+\end{itemize}
+
+حالا وقت آن است که ببینیم چه چیزی ساخته‌ایم.
+
+Sprint Review جلسه‌ای است که در آن:
+\begin{itemize}
+    \item تیم محصول را به مشتری نشان می‌دهد
+    \item مشتری بازخورد می‌دهد
+    \item دربارهٔ Sprint بعدی تصمیم می‌گیریم
+\end{itemize}
+
+\textbf{این جلسه، قلب Scrum است.} بدون آن، Scrum فقط یک سری جلسهٔ بی‌معنی 
+است.
+
+\subsection{آنچه در این جزوه یاد می‌گیرید}
+\begin{itemize}
+    \item Sprint Review چیست و چرا مهم است
+    \item تفاوت Sprint Review و Retrospective
+    \item چطور Demo مؤثر ارائه دهیم
+    \item چطور بازخورد سازنده بگیریم
+    \item چطور Retrospective انجام دهیم
+    \item چطور Sprint بعدی را برنامه‌ریزی کنیم
+\end{itemize}
+
+% ============================================================
+\section{Sprint Review چیست؟}
+
+\subsection{تعریف رسمی}
+\begin{quote}
+\textbf{Sprint Review} یک جلسهٔ غیررسمی در پایان هر Sprint است که در آن تیم 
+توسعه محصول را به ذی‌نفعان نشان می‌دهد و بازخورد می‌گیرد.
+\end{quote}
+
+\textbf{منبع:} Scrum Guide 2020
+
+\subsection{ویژگی‌های کلیدی}
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{ویژگی} & \textbf{توضیح} \\
+\hline
+مدت & حداکثر ۴ ساعت برای Sprint یک‌ماهه (۱-۲ ساعت برای Sprint دو هفته‌ای) \\
+\hline
+شرکت‌کنندگان & تیم توسعه + Product Owner + Scrum Master + مشتری + ذی‌نفعان 
+\\
+\hline
+هدف & بازخورد، نه نمره \\
+\hline
+خروجی & Backlog به‌روز + تصمیم برای Sprint بعدی \\
+\hline
+فراوانی & پایان هر Sprint \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Sprint Review چه چیزی \textbf{نیست}؟}
+
+\begin{itemize}
+    \item ❌ \textbf{گزارش به مدیر نیست} — یک جلسهٔ تعاملی است
+    \item ❌ \textbf{ارزیابی عملکرد افراد نیست} — ارزیابی محصول است
+    \item ❌ \textbf{ارائهٔ اسلاید نیست} — نمایش محصول کارکننده است
+    \item ❌ \textbf{جلسهٔ تصمیم‌گیری نهایی نیست} — بازخورد جمع می‌کنیم
+\end{itemize}
+
+\subsection{مثال واقعی}
+
+تصور کنید تیم شما یک فروشگاه آنلاین ساخته است.
+
+\textbf{Sprint Review بد:}
+\begin{quote}
+«سلام، ما در این Sprint ۸ تا Story را تحویل دادیم. این هم اسلایدهای ما. 
+سؤالی هست؟»
+\end{quote}
+
+\textbf{Sprint Review خوب:}
+\begin{quote}
+«سلام. امروز می‌خواهم نشان دهم چطور یک مشتری می‌تواند محصول را پیدا کند و به 
+سبد اضافه کند. (Demo زنده) — اینجا صفحهٔ محصولات است. اگر روی فیلتر برند 
+کلیک کنیم... (کلیک) — ببینید چطور لیست فیلتر می‌شود. حالا اگر محصول را به 
+سبد اضافه کنیم... (کلیک) — سبد بلافاصله به‌روز می‌شود. نظر شما چیست؟ چه چیزی 
+را می‌شد بهتر کرد؟»
+\end{quote}
+
+% ============================================================
+\section{تفاوت Sprint Review و Retrospective}
+
+این دو جلسه اغلب اشتباه گرفته می‌شوند. بگذار تفاوت را واضح کنم:
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{ویژگی} & \textbf{Sprint Review} & \textbf{Retrospective} \\
+\hline
+چه کسی؟ & تیم + مشتری + ذی‌نفعان & فقط تیم \\
+\hline
+چه چیزی؟ & محصول & فرآیند \\
+\hline
+هدف & بازخورد روی محصول & بهبود فرآیند \\
+\hline
+خروجی & Backlog به‌روز & اقدام‌های بهبود \\
+\hline
+سؤال اصلی & «چه ساختیم؟» & «چطور کار کردیم؟» \\
+\hline
+زمان & قبل از Retrospective & بعد از Sprint Review \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{مثال}
+
+\textbf{Sprint Review:}
+\begin{quote}
+«مشتری گفت: فیلتر برند خوب است، ولی فیلتر قیمت هم می‌خواهم.»
+\textbf{نتیجه:} فیلتر قیمت به Backlog اضافه می‌شود.
+\end{quote}
+
+\textbf{Retrospective:}
+\begin{quote}
+«تیم گفت: ما این Sprint خیلی کد زدیم ولی تست ننوشتیم. باید تست را جدی 
+بگیریم.»
+\textbf{نتیجه:} اقدام: «از Sprint بعد، برای هر Story حداقل یک تست 
+بنویسیم.»
+\end{quote}
+
+% ============================================================
+\section{Sprint Review در Scrum (جزئیات)}
+
+\subsection{دستور جلسهٔ استاندارد}
+
+\begin{center}
+\begin{tabular}{|l|c|p{8cm}|}
+\hline
+\textbf{مرحله} & \textbf{زمان} & \textbf{توضیح} \\
+\hline
+۱. خوش‌آمد & ۲ دقیقه & Scrum Master جلسه را باز می‌کند \\
+\hline
+۲. Sprint Goal & ۳ دقیقه & Product Owner هدف Sprint را یادآوری می‌کند \\
+\hline
+۳. Demo & ۱۰-۱۵ دقیقه & تیم محصول را نشان می‌دهد \\
+\hline
+۴. بازخورد & ۵-۱۰ دقیقه & مشتری و ذی‌نفعان نظر می‌دهند \\
+\hline
+۵. Backlog & ۵ دقیقه & Product Owner Backlog را به‌روز می‌کند \\
+\hline
+۶. Sprint بعدی & ۵ دقیقه & دربارهٔ Sprint بعدی صحبت می‌شود \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{نقش‌ها در Sprint Review}
+
+\subsubsection{Product Owner}
+\begin{itemize}
+    \item Sprint Goal را یادآوری می‌کند
+    \item Backlog را به‌روز می‌کند
+    \item تصمیم می‌گیرد چه چیزی در Sprint بعدی باشد
+\end{itemize}
+
+\subsubsection{Scrum Master}
+\begin{itemize}
+    \item جلسه را هماهنگ می‌کند
+    \item زمان را کنترل می‌کند
+    \item مطمئن می‌شود همه صحبت کنند
+\end{itemize}
+
+\subsubsection{تیم توسعه}
+\begin{itemize}
+    \item Demo را ارائه می‌دهد
+    \item به سؤالات فنی جواب می‌دهد
+    \item بازخورد را ثبت می‌کند
+\end{itemize}
+
+\subsubsection{مشتری و ذی‌نفعان}
+\begin{itemize}
+    \item Demo را می‌بینند
+    \item بازخورد می‌دهند
+    \item سؤال می‌پرسند
+\end{itemize}
+
+\subsection{قوانین Sprint Review}
+
+\textbf{✅ بایدها:}
+\begin{itemize}
+    \item محصول \textbf{کارکننده} نشان داده شود
+    \item همهٔ ذی‌نفعان دعوت شوند
+    \item بازخورد \textbf{مکتوب} ثبت شود
+    \item جلسه \textbf{زمان‌بندی} داشته باشد
+\end{itemize}
+
+\textbf{❌ نبایدها:}
+\begin{itemize}
+    \item اسلاید نشان دادن (به‌جای Demo)
+    \item بحث فنی طولانی
+    \item سرزنش تیم
+    \item تصمیم‌گیری بدون مشتری
+\end{itemize}
+
+% ============================================================
+\section{نحوهٔ ارائهٔ Demo}
+
+\subsection{اصول Demo مؤثر}
+
+\subsubsection{۱. محصول کارکننده نشان بده، نه اسلاید}
+
+\textbf{بد:}
+\begin{quote}
+«ما این صفحه را ساختیم. این هم اسکرین‌شاتش.»
+\end{quote}
+
+\textbf{خوب:}
+\begin{quote}
+«بگذارید نشان دهم. (کلیک) — این صفحهٔ محصولات است. حالا روی فیلتر کلیک 
+می‌کنم...»
+\end{quote}
+
+\subsubsection{۲. سناریوی واقعی نشان بده}
+
+\textbf{بد:}
+\begin{quote}
+«این endpoint لیست محصولات را برمی‌گرداند.»
+\end{quote}
+
+\textbf{خوب:}
+\begin{quote}
+«مریم وارد سایت می‌شود، دنبال یخچال می‌گردد، فیلتر می‌کند، انتخاب می‌کند، به 
+سبد اضافه می‌کند.»
+\end{quote}
+
+\subsubsection{۳. مسیر اصلی (Happy Path) را نشان بده}
+\begin{itemize}
+    \item کاربر چه کاری می‌کند؟
+    \item چه چیزی می‌بیند؟
+    \item چه نتیجه‌ای می‌گیرد؟
+\end{itemize}
+
+\subsubsection{۴. محدودیت‌ها را صادقانه بگو}
+
+\textbf{بد:}
+\begin{quote}
+«همه‌چیز کار می‌کند.»
+\end{quote}
+
+\textbf{خوب:}
+\begin{quote}
+«این قسمت کار می‌کند. این قسمت هنوز در حال تکمیل است. دلیلش این است که...»
+\end{quote}
+
+\subsubsection{۵. از قبل تمرین کن}
+\begin{itemize}
+    \item Demo را ۲-۳ بار تمرین کن
+    \item مطمئن شو اینترنت/سرور کار می‌کند
+    \item یک نسخهٔ backup (ویدیو) داشته باش
+\end{itemize}
+
+\subsection{ساختار Demo (۵ دقیقه)}
+
+\begin{enumerate}
+    \item \textbf{معرفی (۳۰ ثانیه):} «امروز نشان می‌دهم چطور مشتری محصول را 
+پیدا می‌کند و سفارش می‌دهد.»
+    \item \textbf{سناریو (۳ دقیقه):} باز کردن صفحه، جست‌وجو، انتخاب، افزودن 
+به سبد، ثبت سفارش
+    \item \textbf{نتایج (۱ دقیقه):} «این Storyها تحویل شد: US-01، US-06، 
+US-11»
+    \item \textbf{محدودیت‌ها (۳۰ ثانیه):} «این قسمت هنوز کامل نیست: ...»
+    \item \textbf{دعوت به بازخورد (۳۰ ثانیه):} «نظر شما چیست؟ چه چیزی را 
+می‌شد بهتر کرد؟»
+\end{enumerate}
+
+\subsection{اشتباهات رایج در Demo}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{اشتباه} & \textbf{راه‌حل} \\
+\hline
+اسلاید نشان دادن & محصول واقعی نشان بده \\
+\hline
+صحبت فنی طولانی & به زبان مشتری صحبت کن \\
+\hline
+پنهان کردن مشکلات & صادق باش \\
+\hline
+Demo بدون تمرین & از قبل تمرین کن \\
+\hline
+Demo طولانی & ۵ دقیقه کافی است \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{معیارهای ارزیابی Sprint}
+
+\subsection{چه چیزی ارزیابی می‌شود؟}
+
+\begin{center}
+\begin{tabular}{|l|c|p{8cm}|}
+\hline
+\textbf{معیار} & \textbf{وزن} & \textbf{توضیح} \\
+\hline
+تحویل Storyها & ۴۰٪ & چند تا از Storyها کامل شد \\
+\hline
+کیفیت کد & ۲۰٪ & تست، Review، خوانایی \\
+\hline
+مستندات & ۲۰٪ & Vision، Personas، User Stories \\
+\hline
+ارائه & ۲۰٪ & Demo، وضوح، اعتماد \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{چطور نمرهٔ بهتر بگیریم؟}
+
+\subsubsection{۱. Storyها را کامل تحویل بده}
+\begin{itemize}
+    \item Definition of Done را رعایت کن
+    \item تست بنویس
+    \item Code Review کن
+\end{itemize}
+
+\subsubsection{۲. کیفیت کد را بالا ببر}
+\begin{itemize}
+    \item کد خوانا بنویس
+    \item نام‌گذاری خوب
+    \item تست Unit
+\end{itemize}
+
+\subsubsection{۳. مستندات را کامل کن}
+\begin{itemize}
+    \item Vision به‌روز
+    \item Personas دقیق
+    \item User Stories با Acceptance Criteria
+\end{itemize}
+
+\subsubsection{۴. Demo را خوب ارائه بده}
+\begin{itemize}
+    \item از قبل تمرین کن
+    \item محصول کارکننده نشان بده
+    \item به بازخورد گوش بده
+\end{itemize}
+
+% ============================================================
+\section{Definition of Done (با مثال)}
+
+\subsection{تعریف}
+\begin{quote}
+\textbf{Definition of Done (DoD)} یک توافق تیمی است که مشخص می‌کند یک Story 
+چه زمانی «تمام» است.
+\end{quote}
+
+\subsection{DoD نمونه}
+
+یک Story وقتی «تمام» است که:
+\begin{itemize}
+    \item[$\square$] کد نوشته شده و Merge شده
+    \item[$\square$] تست Unit دارد و پاس می‌شود
+    \item[$\square$] Code Review شده
+    \item[$\square$] مستندات به‌روز است
+    \item[$\square$] در محیط Demo کار می‌کند
+    \item[$\square$] Acceptance Criteria برآورده شده
+\end{itemize}
+
+\subsection{مثال واقعی}
+
+\textbf{Story:} US-01 — نمایش محصولات
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item[$\square$] صفحهٔ محصولات با ۲۰ آیتم نمایش داده شود
+    \item[$\square$] هر آیتم شامل تصویر، نام، قیمت باشد
+    \item[$\square$] بارگذاری < ۲ ثانیه باشد
+\end{itemize}
+
+\textbf{Definition of Done:}
+\begin{itemize}
+    \item[$\square$] کد در \lr{feature/products} نوشته شد
+    \item[$\square$] تست \lr{products.test.js} نوشته شد
+    \item[$\square$] PR باز شد و Review شد
+    \item[$\square$] مستندات \lr{user-stories.md} به‌روز شد
+    \item[$\square$] در \lr{localhost:3000} کار می‌کند
+\end{itemize}
+
+\textbf{نتیجه:} Story «تمام» است. ✅
+
+% ============================================================
+\section{Retrospective (با مثال)}
+
+\subsection{تعریف}
+\begin{quote}
+\textbf{Retrospective} جلسه‌ای داخلی برای تیم است که در آن دربارهٔ فرآیند 
+Sprint قبل صحبت می‌کنند و اقدام‌های بهبود تعیین می‌کنند.
+\end{quote}
+
+\subsection{ویژگی‌ها}
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{ویژگی} & \textbf{توضیح} \\
+\hline
+مدت & ۱-۱.۵ ساعت \\
+\hline
+شرکت‌کنندگان & فقط تیم \\
+\hline
+هدف & بهبود فرآیند \\
+\hline
+خروجی & اقدام‌های قابل اجرا \\
+\hline
+فضا & امن، بدون سرزنش \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{قوانین Retrospective}
+
+\textbf{✅ بایدها:}
+\begin{itemize}
+    \item صادقانه صحبت کن
+    \item به دیگران گوش بده
+    \item روی فرآیند تمرکز کن، نه افراد
+    \item اقدام‌های \textbf{قابل اندازه‌گیری} تعیین کن
+\end{itemize}
+
+\textbf{❌ نبایدها:}
+\begin{itemize}
+    \item سرزنش کردن
+    \item بحث فنی طولانی
+    \item اقدام‌های مبهم («بهتر کار کنیم»)
+    \item جلسهٔ شکایت
+\end{itemize}
+
+\subsection{مثال واقعی}
+
+\textbf{تیم هوم‌استور بعد از Sprint 1:}
+
+\textbf{Start (شروع کنیم):}
+\begin{itemize}
+    \item نوشتن تست از ابتدا (TDD)
+    \item جلسهٔ Daily منظم
+    \item استفاده از GitHub Issues
+\end{itemize}
+
+\textbf{Stop (متوقف کنیم):}
+\begin{itemize}
+    \item کد زدن بدون تست
+    \item Commitهای بزرگ
+    \item کار انفرادی
+\end{itemize}
+
+\textbf{Continue (ادامه دهیم):}
+\begin{itemize}
+    \item Code Review
+    \item مستندسازی
+    \item استفاده از AI با شفافیت
+\end{itemize}
+
+\textbf{نتیجه:} ۳ اقدام مشخص برای Sprint 2.
+
+% ============================================================
+\section{سؤالات کلیدی برای مطالعه}
+
+\subsection{سطح ۱ (پایه)}
+
+\subsubsection{سؤال ۱: Sprint Review چیست؟ در چه زمانی برگزار می‌شود؟}
+\textbf{پاسخ:} Sprint Review یک جلسهٔ غیررسمی در پایان هر Sprint است که در 
+آن تیم محصول را به ذی‌نفعان نشان می‌دهد و بازخورد می‌گیرد. در پایان هر Sprint 
+برگزار می‌شود (معمولاً هر ۲-۴ هفته).
+
+\subsubsection{سؤال ۲: تفاوت Sprint Review و Retrospective چیست؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{Sprint Review:} با مشتری، دربارهٔ محصول، بازخورد محصول
+    \item \textbf{Retrospective:} فقط تیم، دربارهٔ فرآیند، بهبود فرآیند
+\end{itemize}
+
+\subsubsection{سؤال ۳: Definition of Done چیست؟}
+\textbf{پاسخ:} یک توافق تیمی است که مشخص می‌کند یک Story چه زمانی «تمام» 
+است. شامل: کد نوشته شده، تست دارد، Code Review شده، مستندات به‌روز، در Demo 
+کار می‌کند.
+
+\subsubsection{سؤال ۴: چه کسانی در Sprint Review شرکت می‌کنند؟}
+\textbf{پاسخ:} تیم توسعه، Product Owner، Scrum Master، مشتری، و ذی‌نفعان.
+
+\subsubsection{سؤال ۵: چرا Sprint Review مهم است؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item مطمئن می‌شویم در مسیر درست هستیم
+    \item مشتری زودتر بازخورد می‌دهد
+    \item مشکلات زودتر کشف می‌شوند
+    \item تیم انگیزه می‌گیرد
+    \item شفافیت ایجاد می‌شود
+\end{itemize}
+
+\subsection{سطح ۲ (متوسط)}
+
+\subsubsection{سؤال ۶: چطور یک Demo مؤثر ارائه دهیم؟}
+\textbf{پاسخ:}
+\begin{enumerate}
+    \item محصول کارکننده نشان بده، نه اسلاید
+    \item سناریوی واقعی نشان بده
+    \item مسیر اصلی (Happy Path) را نشان بده
+    \item محدودیت‌ها را صادقانه بگو
+    \item از قبل تمرین کن
+\end{enumerate}
+
+\subsubsection{سؤال ۷: چرا اسلاید نشان دادن در Sprint Review بد است؟}
+\textbf{پاسخ:} چون Sprint Review برای \textbf{دیدن محصول کارکننده} است، نه 
+شنیدن گزارش. اسلاید نشان می‌دهد که تیم اعتماد ندارد محصول را نشان دهد، یا 
+محصول آماده نیست. همچنین مشتری نمی‌تواند بازخورد واقعی بدهد.
+
+\subsubsection{سؤال ۸: Start/Stop/Continue چیست؟ چطور استفاده کنیم؟}
+\textbf{پاسخ:} یک روش ساده برای Retrospective:
+\begin{itemize}
+    \item \textbf{Start:} چه کاری را شروع کنیم؟
+    \item \textbf{Stop:} چه کاری را متوقف کنیم؟
+    \item \textbf{Continue:} چه کاری را ادامه دهیم؟
+\end{itemize}
+هر بخش حداقل ۱-۲ مورد. اقدام‌ها باید قابل اندازه‌گیری باشند.
+
+\subsubsection{سؤال ۹: چطور بازخورد سازنده بگیریم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item سؤال باز بپرس: «چه چیزی را می‌شد بهتر کرد؟»
+    \item به جای دفاع، گوش بده
+    \item بازخورد را مکتوب کن
+    \item از بازخورد تشکر کن
+    \item اقدام مشخص تعیین کن
+\end{itemize}
+
+\subsubsection{سؤال ۱۰: چطور اقدام‌های Retrospective را پیگیری کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item هر اقدام یک \textbf{مالک} داشته باشد
+    \item هر اقدام \textbf{معیار موفقیت} داشته باشد
+    \item در Sprint بعد، بررسی شود
+    \item اگر کار نکرد، دلیلش پیدا شود
+    \item اگر کار کرد، جشن گرفته شود
+\end{itemize}
+
+\subsection{سطح ۳ (پیشرفته)}
+
+\subsubsection{سؤال ۱۱: اگر مشتری در Sprint Review گفت «همه‌چیز خوب است» 
+ولی بعداً ناراضی بود، چه کار می‌کنید؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item سؤال‌های عمیق‌تر بپرسید: «اگر بخواهید یک چیزی را عوض کنید، چه؟»
+    \item سناریوهای واقعی‌تر نشان دهید
+    \item از مشتری بخواهید خودش محصول را امتحان کند
+    \item بازخورد غیرمستقیم بگیرید (نظرسنجی)
+    \item در Retrospective بررسی کنید چرا بازخورد نگرفتیم
+\end{itemize}
+
+\subsubsection{سؤال ۱۲: چطور مطمئن شویم Sprint Review به یک جلسهٔ شکایت 
+تبدیل نمی‌شود؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item قوانین جلسه را از اول مشخص کنید
+    \item Scrum Master زمان و فضا را مدیریت کند
+    \item روی \textbf{محصول} تمرکز کنید، نه افراد
+    \item بازخورد را \textbf{مکتوب} کنید
+    \item هر انتقاد را به یک \textbf{اقدام} تبدیل کنید
+\end{itemize}
+
+\subsubsection{سؤال ۱۳: اگر تیم در Sprint Review شکست خورد، چطور برخورد 
+کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{سرزنش نکنید} — شکست فرصت یادگیری است
+    \item در Retrospective صادقانه بررسی کنید
+    \item دلایل واقعی را پیدا کنید (نه بهانه)
+    \item اقدام‌های مشخص تعیین کنید
+    \item Sprint بعدی را واقع‌بینانه‌تر برنامه‌ریزی کنید
+\end{itemize}
+
+\subsubsection{سؤال ۱۴: چطور Sprint Review را برای تیم‌های دور از هم 
+(ریموت) برگزار کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{ابزار:} Zoom / Google Meet + Miro
+    \item \textbf{Demo:} اشتراک صفحه + کنترل از راه دور
+    \item \textbf{بازخورد:} Miro board برای نوشتن همزمان
+    \item \textbf{ضبط:} جلسه را ضبط کنید برای غایبان
+    \item \textbf{Async:} اگر زمان هماهنگ سخت است، ویدیوی Demo بفرستید
+\end{itemize}
+
+% ============================================================
+\section{تمرین‌ها}
+
+\subsection{تمرین ۱: تحلیل Sprint Review}
+یک ویدیو از Sprint Review واقعی پیدا کنید و تحلیل کنید:
+\begin{itemize}
+    \item چه چیزی خوب بود؟
+    \item چه چیزی بد بود؟
+    \item چه چیزی یاد گرفتید؟
+\end{itemize}
+
+\subsection{تمرین ۲: نوشتن DoD}
+برای پروژهٔ خودتان، Definition of Done بنویسید:
+\begin{itemize}
+    \item حداقل ۵ مورد
+    \item قابل اندازه‌گیری
+    \item برای همهٔ Storyها
+\end{itemize}
+
+\subsection{تمرین ۳: Retrospective}
+یک Retrospective برای Sprint 1 خودتان انجام دهید:
+\begin{itemize}
+    \item Start / Stop / Continue
+    \item حداقل ۳ اقدام
+    \item مالک مشخص
+\end{itemize}
+
+\subsection{تمرین ۴: Demo}
+یک Demo ۵ دقیقه‌ای برای پروژهٔ خودتان آماده کنید:
+\begin{itemize}
+    \item سناریوی واقعی
+    \item محصول کارکننده
+    \item دعوت به بازخورد
+\end{itemize}
+
+% ============================================================
+\section{منابع}
+
+\subsection{منابع اصلی}
+
+\begin{center}
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{منبع} & \textbf{فصل} & \textbf{صفحه} \\
+\hline
+Scrum Guide 2020 & Sprint Review & ۱۰-۱۲ \\
+\hline
+Sommerville — Software Engineering & فصل ۲ & ۳۵-۴۵ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{منابع تکمیلی}
+\begin{itemize}
+    \item \textbf{ویدیو:} Sprint Review in 5 minutes
+    \item \textbf{مقاله:} How to run effective Sprint Review
+    \item \textbf{کتاب:} Agile Retrospectives
+\end{itemize}
+
+\subsection{ابزارها}
+\begin{itemize}
+    \item \textbf{Miro} — برای Retrospective آنلاین
+    \item \textbf{EasyRetro} — رایگان و ساده
+    \item \textbf{FunRetro} — رایگان
+\end{itemize}
+
+% ============================================================
+\section{جمع‌بندی}
+
+\subsection{سه نکتهٔ کلیدی}
+
+\begin{enumerate}
+    \item \textbf{Sprint Review = نمایش، نه گزارش}
+    \begin{itemize}
+        \item محصول کارکننده نشان بده
+        \item بازخورد بگیر
+        \item Backlog را به‌روز کن
+    \end{itemize}
+    \item \textbf{Retrospective = بهبود فرآیند، نه ارزیابی افراد}
+    \begin{itemize}
+        \item صادقانه صحبت کن
+        \item اقدام‌های قابل اندازه‌گیری
+        \item پیگیری کن
+    \end{itemize}
+    \item \textbf{بازخورد = بهترین دوست تیم}
+    \begin{itemize}
+        \item زودتر بازخورد بگیر
+        \item صادقانه گوش بده
+        \item اقدام کن
+    \end{itemize}
+\end{enumerate}
+
+\subsection{سؤال نهایی}
+
+\begin{quote}
+\textbf{اگر امروز Sprint Review داشتید، چه چیزی نشان می‌دادید؟}
+\end{quote}
+
+\vspace{1cm}
+
+\begin{center}
+\textbf{\Large پایان جزوه}\\[0.5cm]
+\textbf{\Large موفق باشید!}
+\end{center}
+
+\end{document}
