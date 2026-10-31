@@ -1,0 +1,931 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{listings}
+
+\geometry{margin=2.5cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\titleformat{\section}{\Large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\setlist{nosep, leftmargin=*}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small جزوهٔ مطالعه — جلسهٔ ۶}
+\fancyhead[L]{\small طراحی شیءگرا و SOLID}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\linespread{1.4}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    language=Java,
+    showstringspaces=false
+}
+
+\title{
+    \vspace{-1cm}
+    \textbf{\Huge جزوهٔ مطالعه}\\[0.3cm]
+    \textbf{\LARGE جلسهٔ ۶: طراحی شیءگرا و SOLID}\\[0.5cm]
+    \large مهندسی نرم‌افزار
+}
+\author{
+    تهیه‌کننده: ابراهیم فضلی\\
+    ترم: ۱۴۰۴
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{درس} & مهندسی نرم‌افزار \\
+\hline
+\textbf{جلسه} & ۶ \\
+\hline
+\textbf{موضوع} & طراحی شیءگرا، SOLID، Coupling/Cohesion \\
+\hline
+\textbf{زمان مطالعه} & ۳-۴ ساعت \\
+\hline
+\textbf{پیش‌نیاز} & جلسات ۱-۵ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{مقدمه}
+
+\subsection{چرا طراحی شیءگرا مهم است؟}
+
+در جلسات قبل یاد گرفتیم:
+\begin{itemize}
+    \item \textbf{جلسهٔ ۱:} مهندسی نرم‌افزار چیست
+    \item \textbf{جلسهٔ ۲:} نیازمندی‌ها
+    \item \textbf{جلسهٔ ۳:} فرآیندهای توسعه
+    \item \textbf{جلسهٔ ۴:} معماری و مدل‌سازی
+    \item \textbf{جلسهٔ ۵:} Sprint Review
+\end{itemize}
+
+حالا وقت آن است که \textbf{کد بهتر} بنویسیم.
+
+\subsection{مشکل کد بد}
+
+تصور کنید یک کلاس \lr{Order} دارید که:
+\begin{itemize}
+    \item مجموع را محاسبه می‌کند
+    \item در دیتابیس ذخیره می‌کند
+    \item ایمیل تأیید می‌فرستد
+    \item فاکتور چاپ می‌کند
+    \item به انبار اطلاع می‌دهد
+\end{itemize}
+
+\textbf{مشکل چیست؟}
+\begin{itemize}
+    \item اگر روش ارسال ایمیل عوض شود، باید \lr{Order} را تغییر دهیم
+    \item اگر دیتابیس عوض شود، باید \lr{Order} را تغییر دهیم
+    \item تست کردن سخت است
+    \item استفادهٔ مجدد ممکن نیست
+\end{itemize}
+
+\textbf{نتیجه:} کد بد = هزینهٔ تغییر بالا.
+
+\subsection{راه‌حل: طراحی شیءگرا}
+
+طراحی شیءگرا به ما کمک می‌کند:
+\begin{itemize}
+    \item کد را به بخش‌های کوچک تقسیم کنیم
+    \item هر بخش یک مسئولیت داشته باشد
+    \item تغییرات، کم‌ترین تأثیر را داشته باشند
+    \item تست کردن آسان باشد
+\end{itemize}
+
+\subsection{آنچه در این جزوه یاد می‌گیرید}
+
+\begin{itemize}
+    \item چهار اصل OOP
+    \item پنج اصل SOLID
+    \item Coupling و Cohesion
+    \item Design Patterns (مقدمه)
+    \item چطور کد بد را Refactor کنیم
+\end{itemize}
+
+% ============================================================
+\section{چهار اصل OOP}
+
+\subsection{Encapsulation — کپسوله‌سازی}
+
+\subsubsection{تعریف}
+داده‌ها و متدها در یک واحد (کلاس) قرار می‌گیرند. داده‌های داخلی 
+\textbf{پنهان} هستند و فقط از طریق متدهای عمومی قابل دسترسی‌اند.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public class Product {
+    public String name;
+    public double price;
+    public int stock;
+}
+\end{lstlisting}
+
+\textbf{مشکل:} هر کسی می‌تواند \lr{price} را منفی کند.
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public class Product {
+    private String name;
+    private double price;
+    private int stock;
+    
+    public void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be 
+negative");
+        }
+        this.price = price;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+}
+\end{lstlisting}
+
+\textbf{مزیت:} قیمت منفی ممکن نیست.
+
+\subsection{Inheritance — ارث‌بری}
+
+\subsubsection{تعریف}
+کلاس فرزند، ویژگی‌ها و متدهای کلاس والد را به ارث می‌برد.
+
+\subsubsection{مثال}
+\begin{lstlisting}
+public class User {
+    protected String email;
+    protected String name;
+    
+    public void login() { ... }
+}
+
+public class Admin extends User {
+    public void manageProducts() { ... }
+}
+\end{lstlisting}
+
+\subsubsection{مزیت و عیب}
+\textbf{مزیت:} استفادهٔ مجدد از کد.
+
+\textbf{عیب:} وابستگی زیاد. تغییر در \lr{User} ممکن است \lr{Admin} را 
+بشکند.
+
+\textbf{توصیه:} \textbf{ترکیب (Composition)} بهتر از \textbf{ارث‌بری 
+(Inheritance)} است.
+
+\subsection{Polymorphism — چندشکلی}
+
+\subsubsection{تعریف}
+یک نام، چند رفتار. متد مشترک، پیاده‌سازی متفاوت.
+
+\subsubsection{مثال}
+\begin{lstlisting}
+public interface PaymentMethod {
+    void pay(double amount);
+}
+
+public class CreditCardPayment implements PaymentMethod {
+    public void pay(double amount) { ... }
+}
+
+public class PayPalPayment implements PaymentMethod {
+    public void pay(double amount) { ... }
+}
+
+// استفاده
+PaymentMethod payment = new CreditCardPayment();
+payment.pay(100000);
+\end{lstlisting}
+
+\textbf{مزیت:} کد عمومی، رفتار خاص.
+
+\subsection{Abstraction — انتزاع}
+
+\subsubsection{تعریف}
+پنهان کردن جزئیات پیاده‌سازی. کاربر فقط \textbf{چه کاری} انجام می‌دهد را 
+می‌بیند.
+
+\subsubsection{مثال}
+\begin{lstlisting}
+public interface OrderRepository {
+    Order findById(int id);
+    void save(Order order);
+}
+
+// کاربر فقط می‌داند save() هست، نمی‌داند چطور
+\end{lstlisting}
+
+\textbf{ابزار:} Interface، Abstract Class.
+
+% ============================================================
+\section{SOLID — پنج اصل طراحی}
+
+\subsection{S — Single Responsibility Principle (SRP)}
+
+\subsubsection{تعریف}
+> هر کلاس فقط یک مسئولیت داشته باشد. فقط یک دلیل برای تغییر.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public class Order {
+    public void calculateTotal() { ... }
+    public void save() { ... }
+    public void sendEmail() { ... }
+    public void printInvoice() { ... }
+}
+\end{lstlisting}
+
+\textbf{مشکل:} ۴ دلیل برای تغییر.
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public class Order {
+    public void calculateTotal() { ... }
+}
+
+public class OrderRepository {
+    public void save(Order order) { ... }
+}
+
+public class EmailService {
+    public void sendConfirmation(Order order) { ... }
+}
+
+public class InvoiceService {
+    public void print(Order order) { ... }
+}
+\end{lstlisting}
+
+\textbf{مزیت:} هر کلاس یک مسئولیت.
+
+\subsection{O — Open/Closed Principle (OCP)}
+
+\subsubsection{تعریف}
+> باز برای توسعه، بسته برای تغییر.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public class PaymentService {
+    public void pay(String method, double amount) {
+        if (method.equals("card")) {
+            // کارت
+        } else if (method.equals("paypal")) {
+            // PayPal
+        } else if (method.equals("crypto")) {
+            // کریپتو
+        }
+        // هر روش جدید = تغییر این کلاس
+    }
+}
+\end{lstlisting}
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public interface PaymentMethod {
+    void pay(double amount);
+}
+
+public class CardPayment implements PaymentMethod { ... }
+public class PayPalPayment implements PaymentMethod { ... }
+
+// افزودن روش جدید = فقط کلاس جدید
+public class CryptoPayment implements PaymentMethod { ... }
+\end{lstlisting}
+
+\textbf{مزیت:} افزودن روش جدید بدون تغییر کد قدیمی.
+
+\subsection{L — Liskov Substitution Principle (LSP)}
+
+\subsubsection{تعریف}
+> فرزند باید بتواند جایگزین والد شود، بدون شکستن رفتار.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public class Rectangle {
+    protected int width, height;
+    public void setWidth(int w) { width = w; }
+    public void setHeight(int h) { height = h; }
+}
+
+public class Square extends Rectangle {
+    public void setWidth(int w) {
+        width = w;
+        height = w; // نقض LSP
+    }
+}
+\end{lstlisting}
+
+\textbf{مشکل:} اگر کسی \lr{Rectangle} را با \lr{Square} جایگزین کند، رفتار 
+عوض می‌شود.
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public interface Shape {
+    int area();
+}
+
+public class Rectangle implements Shape { ... }
+public class Square implements Shape { ... }
+\end{lstlisting}
+
+\textbf{مزیت:} هر دو مستقل، هیچ‌کدام رفتار دیگری را نقض نمی‌کند.
+
+\subsection{I — Interface Segregation Principle (ISP)}
+
+\subsubsection{تعریف}
+> کلاس نباید متدهای غیرضروری را پیاده کند.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public interface PaymentGateway {
+    void pay(double amount);
+    void refund(double amount);
+    void checkStatus(int id);
+}
+
+// کلاس ساده باید هر ۳ متد را پیاده کند
+public class SimplePayment implements PaymentGateway {
+    public void pay(double amount) { ... }
+    public void refund(double amount) { 
+        throw new UnsupportedOperationException();
+    }
+    public void checkStatus(int id) { 
+        throw new UnsupportedOperationException();
+    }
+}
+\end{lstlisting}
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public interface PaymentGateway {
+    void pay(double amount);
+}
+
+public interface RefundGateway {
+    void refund(double amount);
+}
+
+public interface StatusGateway {
+    void checkStatus(int id);
+}
+\end{lstlisting}
+
+\textbf{مزیت:} هر کلاس فقط چیزی که لازم دارد را پیاده می‌کند.
+
+\subsection{D — Dependency Inversion Principle (DIP)}
+
+\subsubsection{تعریف}
+> به انتزاع وابسته باش، نه پیاده‌سازی.
+
+\subsubsection{مثال بد}
+\begin{lstlisting}
+public class OrderService {
+    private PostgresOrderRepository repo;
+    
+    public OrderService() {
+        repo = new PostgresOrderRepository(); // وابستگی مستقیم
+    }
+}
+\end{lstlisting}
+
+\textbf{مشکل:} تغییر دیتابیس = تغییر \lr{OrderService}.
+
+\subsubsection{مثال خوب}
+\begin{lstlisting}
+public class OrderService {
+    private IOrderRepository repo;
+    
+    public OrderService(IOrderRepository repo) {
+        this.repo = repo;
+    }
+}
+
+// استفاده
+IOrderRepository repo = new PostgresOrderRepository();
+OrderService service = new OrderService(repo);
+\end{lstlisting}
+
+\textbf{مزیت:} تغییر دیتابیس = فقط تغییر \lr{repo} در زمان ساخت.
+
+% ============================================================
+\section{SRP در HomeStore — مثال واقعی}
+
+\subsection{کلاس بد}
+
+\begin{lstlisting}
+public class Order {
+    private List<OrderItem> items;
+    private Customer customer;
+    
+    public double calculateTotal() { ... }
+    public void save() { ... }
+    public void sendEmail() { ... }
+    public void printInvoice() { ... }
+    public void notifyWarehouse() { ... }
+}
+\end{lstlisting}
+
+\textbf{مسئولیت‌ها:} محاسبه، ذخیره، ایمیل، چاپ، اطلاع.
+
+\textbf{دلیل تغییر:} ۵ تا!
+
+\subsection{Refactor شده}
+
+\begin{lstlisting}
+// فقط محاسبه
+public class Order {
+    private List<OrderItem> items;
+    
+    public double calculateTotal() {
+        return items.stream()
+            .mapToDouble(OrderItem::getSubtotal)
+            .sum();
+    }
+}
+
+// ذخیره
+public class OrderRepository {
+    public void save(Order order) { ... }
+}
+
+// ایمیل
+public class EmailService {
+    public void sendConfirmation(Order order) { ... }
+}
+
+// چاپ
+public class InvoiceService {
+    public void print(Order order) { ... }
+}
+
+// اطلاع به انبار
+public class StockService {
+    public void reserve(List<OrderItem> items) { ... }
+}
+\end{lstlisting}
+
+\subsection{نتیجه}
+
+\begin{itemize}
+    \item \lr{Order} فقط محاسبه
+    \item \lr{OrderRepository} فقط ذخیره
+    \item \lr{EmailService} فقط ایمیل
+    \item \lr{InvoiceService} فقط چاپ
+    \item \lr{StockService} فقط انبار
+\end{itemize}
+
+\textbf{هر کلاس = یک مسئولیت.} ✅
+
+% ============================================================
+\section{Coupling و Cohesion}
+
+\subsection{تعریف}
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{مفهوم} & \textbf{توضیح} \\
+\hline
+Coupling & وابستگی بین کلاس‌ها — \textbf{کم} بهتر \\
+\hline
+Cohesion & ارتباط داخلی کلاس — \textbf{زیاد} بهتر \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Coupling کم}
+
+\textbf{Coupling کم:} تغییر یک کلاس، بقیه را نشکند.
+
+\textbf{مثال بد:}
+\begin{lstlisting}
+public class OrderService {
+    public void process() {
+        PostgresOrderRepository repo = new PostgresOrderRepository();
+        repo.save();
+    }
+}
+\end{lstlisting}
+
+\textbf{Coupling بالا:} \lr{OrderService} به \lr{PostgresOrderRepository} 
+وابسته است.
+
+\textbf{مثال خوب:}
+\begin{lstlisting}
+public class OrderService {
+    private IOrderRepository repo;
+    
+    public OrderService(IOrderRepository repo) {
+        this.repo = repo;
+    }
+}
+\end{lstlisting}
+
+\textbf{Coupling پایین:} \lr{OrderService} به interface وابسته است.
+
+\subsection{Cohesion زیاد}
+
+\textbf{Cohesion زیاد:} همهٔ متدهای کلاس، یک هدف.
+
+\textbf{مثال بد:}
+\begin{lstlisting}
+public class Utilities {
+    public void sendEmail() { ... }
+    public void calculateTax() { ... }
+    public void formatDate() { ... }
+    public void validatePhone() { ... }
+}
+\end{lstlisting}
+
+\textbf{Cohesion کم:} ۴ هدف مختلف.
+
+\textbf{مثال خوب:}
+\begin{lstlisting}
+public class EmailService {
+    public void send() { ... }
+    public void sendBulk() { ... }
+    public void validate() { ... }
+}
+
+public class TaxCalculator {
+    public double calculate() { ... }
+    public double calculateVAT() { ... }
+}
+\end{lstlisting}
+
+\textbf{Cohesion زیاد:} هر کلاس یک هدف.
+
+% ============================================================
+\section{Design Patterns — مقدمه}
+
+\subsection{تعریف}
+> راه‌حل‌های آماده برای مشکلات رایج طراحی.
+
+\subsection{دسته‌ها}
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{دسته} & \textbf{مثال} \\
+\hline
+Creational & Factory، Singleton، Builder \\
+\hline
+Structural & Adapter، Decorator، Facade \\
+\hline
+Behavioral & Strategy، Observer، Command \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{مثال: Factory}
+
+\begin{lstlisting}
+public interface PaymentMethod {
+    void pay(double amount);
+}
+
+public class PaymentFactory {
+    public static PaymentMethod create(String type) {
+        if (type.equals("card")) return new CardPayment();
+        if (type.equals("paypal")) return new PayPalPayment();
+        throw new IllegalArgumentException();
+    }
+}
+
+// استفاده
+PaymentMethod payment = PaymentFactory.create("card");
+payment.pay(100000);
+\end{lstlisting}
+
+\textbf{مزیت:} کلاینت نمی‌داند کدام کلاس ساخته می‌شود.
+
+\subsection{مثال: Strategy}
+
+\begin{lstlisting}
+public interface ShippingStrategy {
+    double calculate(double weight);
+}
+
+public class PostShipping implements ShippingStrategy {
+    public double calculate(double weight) { return weight * 5000; }
+}
+
+public class ExpressShipping implements ShippingStrategy {
+    public double calculate(double weight) { return weight * 15000; }
+}
+
+// استفاده
+ShippingStrategy strategy = new ExpressShipping();
+double cost = strategy.calculate(2.5);
+\end{lstlisting}
+
+\textbf{مزیت:} افزودن روش جدید بدون تغییر کد.
+
+% ============================================================
+\section{سؤالات کلیدی برای مطالعه}
+
+\subsection{سطح ۱ (پایه)}
+
+\subsubsection{سؤال ۱: Encapsulation چیست؟}
+\textbf{پاسخ:} کپسوله‌سازی داده و متدها در یک واحد (کلاس) است. داده‌های 
+داخلی پنهان هستند و فقط از طریق متدهای عمومی قابل دسترسی‌اند. مزیت: تغییر 
+داخلی، بدون تأثیر بیرونی.
+
+\subsubsection{سؤال ۲: تفاوت Inheritance و Composition چیست؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{Inheritance (ارث‌بری):} کلاس فرزند از والد ارث می‌برد. 
+وابستگی زیاد.
+    \item \textbf{Composition (ترکیب):} کلاس از کلاس دیگر استفاده می‌کند. 
+انعطاف بیشتر.
+\end{itemize}
+توصیه: ترکیب بهتر از ارث‌بری است.
+
+\subsubsection{سؤال ۳: SOLID چیست؟}
+\textbf{پاسخ:} پنج اصل طراحی شیءگرا:
+\begin{itemize}
+    \item \textbf{S:} Single Responsibility
+    \item \textbf{O:} Open/Closed
+    \item \textbf{L:} Liskov Substitution
+    \item \textbf{I:} Interface Segregation
+    \item \textbf{D:} Dependency Inversion
+\end{itemize}
+
+\subsubsection{سؤال ۴: SRP چیست؟}
+\textbf{پاسخ:} هر کلاس فقط یک مسئولیت داشته باشد. فقط یک دلیل برای تغییر. 
+مثال: کلاس \lr{Order} نباید هم محاسبه کند، هم ذخیره، هم ایمیل بفرستد.
+
+\subsubsection{سؤال ۵: Coupling و Cohesion چیست؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{Coupling:} وابستگی بین کلاس‌ها — کم بهتر
+    \item \textbf{Cohesion:} ارتباط داخلی کلاس — زیاد بهتر
+\end{itemize}
+
+\subsection{سطح ۲ (متوسط)}
+
+\subsubsection{سؤال ۶: چطور SRP را در کد تشخیص دهیم؟}
+\textbf{پاسخ:} اگر کلاس بیش از یک دلیل برای تغییر دارد، SRP نقض شده. سؤال 
+بپرسید: «چند نفر ممکن است بخواهند این کلاس را تغییر دهند؟» اگر بیش از یکی، 
+SRP نقض است.
+
+\subsubsection{سؤال ۷: تفاوت OCP و DIP چیست؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item \textbf{OCP:} باز برای توسعه، بسته برای تغییر. افزودن ویژگی جدید 
+بدون تغییر کد قدیمی.
+    \item \textbf{DIP:} به انتزاع وابسته باش، نه پیاده‌سازی.
+\end{itemize}
+هر دو از interface استفاده می‌کنند، ولی هدف متفاوت است.
+
+\subsubsection{سؤال ۸: چرا LSP مهم است؟}
+\textbf{پاسخ:} اگر فرزند نتواند جایگزین والد شود، کدی که با والد کار 
+می‌کند، با فرزند می‌شکند. این باعث باگ‌های پنهان می‌شود.
+
+\subsubsection{سؤال ۹: چطور Coupling را کم کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item به interface وابسته باش، نه پیاده‌سازی
+    \item Dependency Injection
+    \item Event-driven
+    \item لایه‌بندی درست
+\end{itemize}
+
+\subsubsection{سؤال ۱۰: Design Pattern چیست؟}
+\textbf{پاسخ:} راه‌حل آماده برای مشکلات رایج طراحی. سه دسته: Creational، 
+Structural، Behavioral.
+
+\subsection{سطح ۳ (پیشرفته)}
+
+\subsubsection{سؤال ۱۱: اگر کلاسی هم SRP را نقض کند، هم DIP، اول کدام را 
+درست کنیم؟}
+\textbf{پاسخ:} اول SRP. چون کلاس بزرگ را به کلاس‌های کوچک تقسیم می‌کنیم، بعد 
+وابستگی‌ها ساده‌تر می‌شوند. بعد DIP را روی کلاس‌های کوچک اعمال می‌کنیم.
+
+\subsubsection{سؤال ۱۲: چطور مطمئن شویم Refactor کد را نشکسته؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item قبل از Refactor تست بنویس
+    \item بعد از Refactor تست‌ها را اجرا کن
+    \item اگر تست‌ها پاس شدند، Refactor درست است
+\end{itemize}
+این اصل «Refactor با تست» است.
+
+\subsubsection{سؤال ۱۳: آیا همیشه باید SOLID را رعایت کنیم؟}
+\textbf{پاسخ:} نه. برای پروژه‌های کوچک، SOLID ممکن است پیچیدگی اضافه کند. 
+SOLID برای پروژه‌هایی است که \textbf{طول عمر} دارند و \textbf{تغییر} 
+می‌کنند. برای اسکریپت‌های یک‌بارمصرف، لازم نیست.
+
+\subsubsection{سؤال ۱۴: چطور SOLID را در تیم اجرا کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item Code Review با چک‌لیست SOLID
+    \item مثال‌های خوب در تیم
+    \item آموزش
+    \item ابزارهای static analysis
+\end{itemize}
+
+\subsubsection{سؤال ۱۵: اگر کد قدیمی SOLID را نقض می‌کند، چه کار کنیم؟}
+\textbf{پاسخ:}
+\begin{itemize}
+    \item Refactor تدریجی (نه یک‌جا)
+    \item هر Sprint یک کلاس
+    \item تست قبل از Refactor
+    \item اولویت‌بندی بر اساس تغییرات آینده
+\end{itemize}
+
+% ============================================================
+\section{تمرین‌ها}
+
+\subsection{تمرین ۱: تشخیص SRP}
+کد زیر را تحلیل کنید. چند مسئولیت دارد؟
+\begin{lstlisting}
+public class ProductManager {
+    public void addProduct(Product p) { ... }
+    public void editProduct(Product p) { ... }
+    public void deleteProduct(int id) { ... }
+    public void searchProducts(String q) { ... }
+    public void generateReport() { ... }
+}
+\end{lstlisting}
+\textbf{راه‌حل:} ۵ مسئولیت. باید به ۵ کلاس تقسیم شود.
+
+\subsection{تمرین ۲: Refactor با SOLID}
+کد زیر را با SOLID بازنویسی کنید:
+\begin{lstlisting}
+public class OrderManager {
+    public void createOrder(Order o) { ... }
+    public void cancelOrder(int id) { ... }
+    public void sendEmail(Order o) { ... }
+    public void printInvoice(Order o) { ... }
+    public void trackOrder(int id) { ... }
+}
+\end{lstlisting}
+\textbf{راه‌حل:} تقسیم به \lr{OrderService}، \lr{OrderRepository}، 
+\lr{EmailService}، \lr{InvoiceService}، \lr{TrackingService}.
+
+\subsection{تمرین ۳: تشخیص Coupling}
+در کد زیر، Coupling را تشخیص دهید:
+\begin{lstlisting}
+public class UserService {
+    public void register(User u) {
+        PostgresUserRepository repo = new PostgresUserRepository();
+        repo.save(u);
+        SmtpEmailService email = new SmtpEmailService();
+        email.send(u.getEmail());
+    }
+}
+\end{lstlisting}
+\textbf{راه‌حل:} \lr{UserService} به \lr{PostgresUserRepository} و 
+\lr{SmtpEmailService} وابسته است. باید به interface وابسته باشد.
+
+\subsection{تمرین ۴: Factory}
+یک \lr{PaymentFactory} بنویسید که ۳ روش پرداخت (کارت، PayPal، کریپتو) را 
+پشتیبانی کند.
+
+\subsection{تمرین ۵: Strategy}
+یک \lr{ShippingStrategy} بنویسید که ۳ روش ارسال (پست، تیپاکس، پیک) را 
+محاسبه کند.
+
+% ============================================================
+\section{منابع}
+
+\subsection{منابع اصلی}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{منبع} & \textbf{فصل} \\
+\hline
+Clean Code — Robert C. Martin & فصل ۱-۳ \\
+\hline
+Clean Architecture — Robert C. Martin & فصل ۷-۱۰ \\
+\hline
+Sommerville — Software Engineering & فصل ۷ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{منابع آنلاین}
+\begin{itemize}
+    \item \textbf{ویدیو:} SOLID Principles in 10 minutes
+    \item \textbf{مقاله:} The S.O.L.I.D. Principles
+    \item \textbf{کتاب رایگان:} Refactoring.Guru
+\end{itemize}
+
+% ============================================================
+\section{چک‌لیست مطالعه}
+
+\subsection{قبل از مطالعه}
+\begin{itemize}
+    \item[$\square$] جزوه را دانلود کردم
+    \item[$\square$] وقت کافی دارم (۳-۴ ساعت)
+\end{itemize}
+
+\subsection{در حین مطالعه}
+\begin{itemize}
+    \item[$\square$] بخش ۱ (مقدمه) را خواندم
+    \item[$\square$] بخش ۲ (چهار اصل OOP) را خواندم
+    \item[$\square$] بخش ۳ (SOLID) را خواندم
+    \item[$\square$] بخش ۴ (SRP در HomeStore) را خواندم
+    \item[$\square$] بخش ۵ (Coupling/Cohesion) را خواندم
+    \item[$\square$] بخش ۶ (Design Patterns) را خواندم
+    \item[$\square$] بخش ۷ (سؤالات) را خواندم
+    \item[$\square$] بخش ۸ (تمرین‌ها) را خواندم
+\end{itemize}
+
+\subsection{بعد از مطالعه}
+\begin{itemize}
+    \item[$\square$] سؤالات سطح ۱ را جواب دادم
+    \item[$\square$] سؤالات سطح ۲ را جواب دادم
+    \item[$\square$] سؤالات سطح ۳ را جواب دادم
+    \item[$\square$] تمرین ۱ را انجام دادم
+    \item[$\square$] تمرین ۲ را انجام دادم
+    \item[$\square$] تمرین ۳ را انجام دادم
+    \item[$\square$] تمرین ۴ را انجام دادم
+    \item[$\square$] تمرین ۵ را انجام دادم
+\end{itemize}
+
+% ============================================================
+\section{جمع‌بندی}
+
+\subsection{سه نکتهٔ کلیدی}
+\begin{enumerate}
+    \item \textbf{SOLID = پنج اصل برای کد قابل نگهداری}
+    \begin{itemize}
+        \item SRP: یک مسئولیت
+        \item OCP: باز برای توسعه
+        \item LSP: جایگزینی
+        \item ISP: interface کوچک
+        \item DIP: وابسته به انتزاع
+    \end{itemize}
+    \item \textbf{Coupling کم، Cohesion زیاد}
+    \begin{itemize}
+        \item Coupling: وابستگی بین کلاس‌ها
+        \item Cohesion: ارتباط داخلی کلاس
+    \end{itemize}
+    \item \textbf{Refactor یک عادت است}
+    \begin{itemize}
+        \item هر Sprint کمی
+        \item با تست
+        \item تدریجی
+    \end{itemize}
+\end{enumerate}
+
+\subsection{سؤال نهایی}
+\begin{quote}
+\textbf{اگر امروز کد Sprint 1 خود را ببینید، چند تا کلاس SRP را نقض 
+می‌کنند؟}
+\end{quote}
+
+\vspace{1cm}
+
+\begin{center}
+\textbf{\Large پایان جزوه}\\[0.5cm]
+\textbf{\Large موفق باشید!}
+\end{center}
+
+\end{document}
