@@ -1,0 +1,488 @@
+\documentclass[14pt, a4paper, landscape]{extarticle}
+
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+
+\geometry{margin=1cm}
+
+\usepackage{xepersian}
+\settextfont{Vazirmatn}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Vazirmatn}
+
+\definecolor{primary}{RGB}{139, 90, 43}
+\definecolor{accent}{RGB}{224, 122, 63}
+\definecolor{bg}{RGB}{245, 240, 232}
+\definecolor{darkbg}{RGB}{92, 58, 26}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\textcolor{primary}{مهندسی نرم‌افزار — جلسهٔ ۶}}
+\fancyfoot[C]{\textcolor{primary}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\newcommand{\slide}[1]{%
+    \newpage
+    \begin{center}
+    \begin{minipage}[t]{0.95\textwidth}
+    \vspace{0.5cm}
+    #1
+    \vspace{0.5cm}
+    \end{minipage}
+    \end{center}
+}
+
+\newcommand{\slidetitle}[1]{%
+    \begin{center}
+        {\LARGE\bfseries\textcolor{primary}{#1}}
+    \end{center}
+    \vspace{0.5cm}
+}
+
+\newcommand{\myaccent}[1]{\textcolor{accent}{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[darkbg] (current page.north west) rectangle (current page.south 
+east);
+\end{tikzpicture}
+
+\begin{center}
+    \vspace*{4cm}
+    {\color{white}\Huge\bfseries مهندسی نرم‌افزار}
+    
+    \vspace{1cm}
+    
+    {\color{accent}\LARGE جلسهٔ ۶ — طراحی شیءگرا و SOLID}
+    
+    \vspace{2cm}
+    
+    {\color{white}\Large ابراهیم فضلی}
+    
+    \vspace{0.5cm}
+    
+    {\color{white}\large ترم ۱۴۰۴}
+\end{center}
+
+\pagestyle{fancy}
+
+\slide{
+    \slidetitle{مرور جلسهٔ ۵}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item Sprint Review: نمایش محصول، نه گزارش
+        \item Definition of Done
+        \item Retrospective: Start / Stop / Continue
+        \item درس‌های Sprint 1
+        \item برنامهٔ Sprint 2
+    \end{itemize}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{امروز: چطور کد بهتر بنویسیم؟}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{چرا طراحی شیءگرا مهم است؟}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.6em]
+        \item {\large کد خوب = قابل نگهداری}
+        \item {\large کد بد = هزینهٔ تغییر بالا}
+        \item {\large طراحی شیءگرا = مدیریت پیچیدگی}
+        \item {\large SOLID = اصول طراحی خوب}
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\large\myaccent{۸۰٪ زمان توسعه، صرف خواندن کد می‌شود.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{چهار اصل OOP}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{lp{10cm}}
+            \toprule
+            \textbf{اصل} & \textbf{معنی} \\
+            \midrule
+            Encapsulation & کپسوله‌سازی داده و رفتار \\
+            \hline
+            Inheritance & ارث‌بری از کلاس والد \\
+            \hline
+            Polymorphism & چندشکلی — یک نام، چند رفتار \\
+            \hline
+            Abstraction & انتزاع — پنهان کردن جزئیات \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{این چهار اصل، پایهٔ طراحی شیءگرا هستند.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Encapsulation — کپسوله‌سازی}
+    \vspace{0.5cm}
+    {\large داده و متدها در یک واحد (کلاس) قرار می‌گیرند.}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item داده‌های داخلی \textbf{پنهان} هستند
+        \item دسترسی فقط از طریق \textbf{متدهای عمومی}
+        \item مزیت: تغییر داخلی، بدون تأثیر بیرونی
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: کلاس Product — قیمت خصوصی، متد getPrice() عمومی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Inheritance — ارث‌بری}
+    \vspace{0.5cm}
+    {\large کلاس فرزند، ویژگی‌های کلاس والد را به ارث می‌برد.}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item مزیت: \textbf{استفادهٔ مجدد} از کد
+        \item عیب: \textbf{وابستگی} زیاد
+        \item توصیه: \textbf{ترکیب} بهتر از ارث‌بری است
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: Admin از User ارث می‌برد}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Polymorphism — چندشکلی}
+    \vspace{0.5cm}
+    {\large یک نام، چند رفتار.}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item متد \textbf{مشترک}، پیاده‌سازی \textbf{متفاوت}
+        \item مزیت: کد \textbf{عمومی}، رفتار \textbf{خاص}
+        \item مثال: \lr{pay()} برای کارت، PayPal، درگاه
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{یک interface، چند implementation}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Abstraction — انتزاع}
+    \vspace{0.5cm}
+    {\large پنهان کردن جزئیات پیاده‌سازی.}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item کاربر \textbf{چه کاری} انجام می‌دهد را می‌بیند
+        \item \textbf{چطور} انجام می‌دهد را نمی‌بیند
+        \item ابزار: Interface، Abstract Class
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: UserRepository.save() — بدون دانستن جزئیات 
+دیتابیس}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{SOLID چیست؟}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries پنج اصل طراحی شیءگرا}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{center}
+        \begin{tabular}{lp{9cm}}
+            \toprule
+            \textbf{حرف} & \textbf{اصل} \\
+            \midrule
+            \textbf{S} & Single Responsibility Principle \\
+            \hline
+            \textbf{O} & Open/Closed Principle \\
+            \hline
+            \textbf{L} & Liskov Substitution Principle \\
+            \hline
+            \textbf{I} & Interface Segregation Principle \\
+            \hline
+            \textbf{D} & Dependency Inversion Principle \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{S — Single Responsibility}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries هر کلاس فقط یک مسئولیت}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item کلاس \textbf{فقط یک دلیل} برای تغییر داشته باشد
+        \item اگر کلاس هم محاسبه، هم ذخیره، هم چاپ کند → نقض SRP
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: Order نباید فاکتور چاپ کند. Invoice جدا باشد.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{O — Open/Closed}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries باز برای توسعه، بسته برای تغییر}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item افزودن ویژگی \textbf{جدید} بدون تغییر کد \textbf{قدیمی}
+        \item ابزار: Interface، Abstract Class
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: افزودن روش پرداخت جدید، بدون تغییر کد اصلی}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{L — Liskov Substitution}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries فرزند باید جایگزین والد شود}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item هر جا \lr{User} انتظار می‌رود، \lr{Admin} هم کار کند
+        \item فرزند نباید \textbf{رفتار} والد را نقض کند
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال بد: Square از Rectangle ارث می‌برد، ولی setWidth() 
+را نقض می‌کند}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{I — Interface Segregation}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries رابط‌های کوچک، نه بزرگ}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item کلاس نباید متدهای \textbf{غیرضروری} را پیاده کند
+        \item چند interface کوچک بهتر از یک interface بزرگ
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: PaymentGateway و RefundGateway جدا باشند}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{D — Dependency Inversion}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries به انتزاع وابسته باش، نه پیاده‌سازی}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item کلاس سطح بالا نباید به کلاس سطح پایین وابسته باشد
+        \item هر دو به \textbf{interface} وابسته باشند
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{مثال: OrderService به \lr{IOrderRepository} وابسته 
+باشد، نه به \lr{PostgresOrderRepository}}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{مثال: نقض SRP در HomeStore}
+    \vspace{0.5cm}
+    {\large کلاس \lr{Order} که همه‌کاره است:}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.4em]
+        \item محاسبهٔ مجموع
+        \item ذخیره در دیتابیس
+        \item ارسال ایمیل تأیید
+        \item چاپ فاکتور
+        \item اطلاع به انبار
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\large\myaccent{۵ دلیل برای تغییر = نقض شدید SRP}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Refactor با SOLID}
+    \vspace{0.5cm}
+    {\large جدا کردن مسئولیت‌ها:}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{ll}
+            \toprule
+            \textbf{کلاس} & \textbf{مسئولیت} \\
+            \midrule
+            \lr{Order} & محاسبهٔ مجموع \\
+            \hline
+            \lr{OrderRepository} & ذخیره در دیتابیس \\
+            \hline
+            \lr{EmailService} & ارسال ایمیل \\
+            \hline
+            \lr{InvoiceService} & چاپ فاکتور \\
+            \hline
+            \lr{StockService} & اطلاع به انبار \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{center}
+        {\myaccent{هر کلاس = یک مسئولیت}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{Coupling و Cohesion}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{lp{9cm}}
+            \toprule
+            \textbf{مفهوم} & \textbf{توضیح} \\
+            \midrule
+            Coupling & وابستگی بین کلاس‌ها — \textbf{کم} بهتر \\
+            \hline
+            Cohesion & ارتباط داخلی کلاس — \textbf{زیاد} بهتر \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.4em]
+        \item \textbf{Coupling کم:} تغییر یک کلاس، بقیه را نشکند
+        \item \textbf{Cohesion زیاد:} همهٔ متدهای کلاس، یک هدف
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{مثال: Coupling در HomeStore}
+    \vspace{0.5cm}
+    {\large کد با Coupling بالا:}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.4em]
+        \item \lr{OrderService} مستقیماً \lr{PostgresOrderRepository} را 
+می‌سازد
+        \item تغییر دیتابیس = تغییر OrderService
+    \end{itemize}
+    \vspace{0.8cm}
+    {\large کد با Coupling پایین:}
+    \vspace{0.5cm}
+    \begin{itemize}[itemsep=0.4em]
+        \item \lr{OrderService} به \lr{IOrderRepository} وابسته است
+        \item تغییر دیتابیس = فقط تغییر implementation
+    \end{itemize}
+}
+
+\slide{
+    \slidetitle{Design Patterns — مقدمه}
+    \vspace{0.5cm}
+    \begin{center}
+        {\large\bfseries راه‌حل‌های آماده برای مشکلات رایج}
+    \end{center}
+    \vspace{0.8cm}
+    \begin{itemize}[itemsep=0.5em]
+        \item \textbf{Creational:} Factory، Singleton، Builder
+        \item \textbf{Structural:} Adapter، Decorator، Facade
+        \item \textbf{Behavioral:} Strategy، Observer، Command
+    \end{itemize}
+    \vspace{0.8cm}
+    \begin{center}
+        {\myaccent{در جلسهٔ ۷ عمیق‌تر می‌بینیم.}}
+    \end{center}
+}
+
+\slide{
+    \slidetitle{تمرین: Refactor کد}
+    \vspace{0.5cm}
+    {\large کد زیر را با SOLID بازنویسی کنید:}
+    \vspace{0.5cm}
+    \begin{center}
+        \begin{tabular}{lp{9cm}}
+            \toprule
+            \textbf{کلاس} & \textbf{مسئولیت‌ها} \\
+            \midrule
+            \lr{ProductManager} & افزودن، ویرایش، حذف، جست‌وجو، گزارش \\
+            \hline
+            \lr{OrderManager} & ثبت، لغو، پیگیری، ایمیل، فاکتور \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+    \vspace{0.5cm}
+    {\large \textbf{سؤال:} چند کلاس جدید لازم است؟ هر کلاس چه مسئولیتی 
+دارد؟}
+}
+
+\slide{
+    \slidetitle{تسک هفتهٔ آینده}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\textcolor{primary}{تسک شما:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item کد Sprint 1 را بازبینی کنید
+            \item کلاس‌های بزرگ را جدا کنید
+            \item SRP را رعایت کنید
+            \item Coupling را کم کنید
+            \item مستندسازی تصمیم‌ها
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        {\bfseries\myaccent{تسک من:}}
+        \vspace{0.3cm}
+        \begin{itemize}[itemsep=0.3em]
+            \item Refactor کد HomeStore
+            \item مستند SOLID
+            \item جزوهٔ مطالعه
+            \item آماده‌سازی جلسهٔ ۷
+        \end{itemize}
+    \end{minipage}
+}
+
+\slide{
+    \slidetitle{سه برداشت کلیدی}
+    \vspace{1cm}
+    \begin{enumerate}[itemsep=0.8em]
+        \item {\large SOLID = پنج اصل برای کد قابل نگهداری}
+        \item {\large Coupling کم، Cohesion زیاد}
+        \item {\large Refactor یک عادت است، نه یک پروژه}
+    \end{enumerate}
+}
+
+\slide{
+    \begin{center}
+        \vspace{3cm}
+        {\Huge\bfseries سؤالی دارید؟}
+        \vspace{1.5cm}
+        {\LARGE\myaccent{به امید یک ترم پربار}}
+    \end{center}
+}
+
+\end{document}

@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # TeX temp files
 .texpadtmp/
+*.aux
+*.out
+*.toc
